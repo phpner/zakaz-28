@@ -1,0 +1,198 @@
+{% extends "layout/base.twig" %}
+{% block title %}элементы трубопровода{% endblock %}
+
+{% block haderbox %}
+    <section class="elements__header">
+        <div class="wrapper">
+            <div class="truby__text__wrap">
+                <h1>элементы трубопровода</h1>
+                <span>Ознакомьтесь с прайс-листом для всей продукции элементы трубопровода</span>
+            </div>
+            <a class="back__catalog" href="catalog.html"><i class="icon-arrD"></i>Вернуться в каталог</a>
+        </div>
+    </section>
+    <div class="breadcrumbs">
+        <div class="wrapper">
+            <a href="/">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <span>элементы трубопровода</span>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="wrapper">
+        <div class="filter" id="bend">
+            <div class="filter__box__input filter__box__name">
+                <span>Выбрать марку стали:</span>
+                <div class="input__fake">
+                    <p class="input__fake__plac">Все марки</p>
+                    <i class="icon-arrD"></i>
+                </div>
+                <div class="filter__col__left left__side">
+                    <div class="filter__col__left__box">
+                        <div class="filter__col title">
+                            <label>
+                                <input type="checkbox" value="all">
+                                <span></span>
+                                <p>Все марки</p>
+                            </label>
+                        </div>
+
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="12Х18Н10Т (ГОСТ 17375-01)">
+                                <span></span>
+                                <p>12Х18Н10Т (ГОСТ 17375-01)</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="filter__col__left__box">
+
+                    </div>
+                </div>
+            </div>
+            <div class="filter__box__input filter__box__diam">
+                <span>Выбрать диаметр изделия:</span>
+                <div class="input__fake">
+                    <p class="input__fake__plac">Все диаметры</p>
+                    <i class="icon-arrD"></i>
+                </div>
+                <div class="filter__col__left">
+
+                    <div class="filter__col__left__box">
+                        <div class="filter__col title">
+                            <label>
+                                <input type="checkbox" value="all">
+                                <span></span>
+                                <p>Всё</p>
+                            </label>
+                        </div>
+
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="45">
+                                <span></span>
+                                <p>45</p>
+                            </label>
+                        </div>
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="89">
+                                <span></span>
+                                <p>89</p>
+                            </label>
+                        </div>
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="108">
+                                <span></span>
+                                <p>108</p>
+                            </label>
+                        </div>
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="133">
+                                <span></span>
+                                <p>133</p>
+                            </label>
+                        </div>
+
+
+                    </div>
+                    <div class="filter__col__left__box">
+
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="159">
+                                <span></span>
+                                <p>159</p>
+                            </label>
+                        </div>
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="219">
+                                <span></span>
+                                <p>219</p>
+                            </label>
+                        </div>
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="273">
+                                <span></span>
+                                <p>273</p>
+                            </label>
+                        </div>
+                        <div class="filter__col">
+                            <label>
+                                <input type="checkbox" value="325">
+                                <span></span>
+                                <p>325</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter__center">
+                <i class=" icon-reload"></i>
+                <span>Дата актуализации склада: 5.12.2019</span>
+            </div>
+            <div class="filter__center__bag">
+                <div class="filter__center__bag__left">
+                    <div class="filter__center__bag__item">
+                        <i class=" icon-bag"></i>
+                    </div>
+                    <div class="filter__center__bag__item">
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                    </div>
+                    <div class="filter__center__bag__item">
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                    </div>
+                    <div class="filter__center__bag__item">
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                    </div>
+                    <div class="filter__center__bag__item">
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                        <i class=" icon-bag"></i>
+                    </div>
+                </div>
+                <div class="filter__center__bag__right">
+                    <div class="filter__center__bag__item">до 1 тонны</div>
+                    <div class="filter__center__bag__item">1 - 3 тонны</div>
+                    <div class="filter__center__bag__item">3 - 10 тонны</div>
+                    <div class="filter__center__bag__item">10 - 20 тонны</div>
+                    <div class="filter__center__bag__item">более 20 тонн</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="filter-body">
+        <div class="filter-body__header">
+            <div class="wrapper">
+                <div class="filter-body__header__col">
+                    <p>Размер</p>
+                </div>
+                <div class="filter-body__header__col">
+                    <p>Цена с НДС за тонну</p>
+                </div>
+                <div class="filter-body__header__col">
+                    <p>В наличии</p>
+                </div>
+                <div class="filter-body__header__col">
+                    <p>В пути на склад</p>
+                </div>
+            </div>
+        </div>
+        <div class="filter-body__center">
+            <div class="filter-body__center__innder"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+.about {
+  h2{
+    padding-top: 64px;
+  }
+  &__row {
+    display: flex;
+    justify-content: center;
+  }
+  &__col {
+    width: 300px;
+    min-height: 295px;
+    margin-right: 80px;
+    background: #fff;
+    padding: 29px;
+    box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.02);
+    i{
+      font-size: 30px;
+    }
+    &:last-child{
+      margin-right: 0;
+    }
+    h3{
+      font-size: 16px;
+      font-weight: bold;
+      color: #000000;
+      text-transform: uppercase;
+      padding-top: 16px;
+      padding-bottom: 32px;
+    }
+    p{
+      color: #8E8E8E;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+    }
+    span{
+      font-style: normal;
+      font-weight: 900;
+      font-size: 57px;
+      color:  #F9F9F9;;
+    }
+  }
+  &__col__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

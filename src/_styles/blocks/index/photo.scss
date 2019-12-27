@@ -1,0 +1,82 @@
+.photo {
+
+  .slick-dots {
+    z-index: 6;
+    display: flex;
+    justify-content: center;
+    bottom: -52px;
+  }
+  .slick-dots li button{
+    background: #D2D2D2;
+  }
+  .slick-dots .slick-active button {
+    width: 16px;
+    background: #ef672b;
+  }
+  .slick-next, .slick-prev{
+    color: #2F2F2F;
+  }
+  box-shadow: 2px 8px 6px 0px rgba(0, 0, 0, 0.64);
+  h2{
+    padding-top: 99px;
+  }
+  &__row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  &__col{
+    cursor: pointer;
+    width: 20%;
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+    img{
+      width: 100%;
+      height: 100% ;
+    }
+  }
+
+  &__col__text{
+    max-height: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: opacity 0.3s ease-in;
+    opacity: 0;
+    cursor: url("../img/pointer.png")  2 2, auto;
+    a{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      background: $orange;
+      color: #fff;
+      width: 208px;
+      height: 50px;
+      transition: all 0.5s;
+      cursor: url("../img/pointer.png")  2 2, auto;
+
+      &:hover{
+        background: lighten($orange,10%);
+      }
+      img{
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+    }
+  }
+  &__col:hover  &__col__text{
+    opacity: 1;
+  }
+}

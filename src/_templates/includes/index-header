@@ -1,0 +1,66 @@
+
+<div class="header__slider__wrapper">
+    <div class="header__slider">
+        <div class="header__slider__item">
+            <div class="header__slider__item__text">
+                <h2>Нержавеющий металлопрокат <br> <span>оптом в Новосибирске</span></h2>
+                <p>
+                    Основной деятельностью компании "Транссибметалл" является оптовая продажа <br>
+                    нержавеющего металлопроката. Конкурентоспособные цены, высокое качество <br>
+                    продукции залог долгосрочных взаимоотношений с нашими клиентами.
+                </p>
+                <a class="header__slider__item__text__btn btn-dat" href="#"><img src="img/datted.svg" alt="">В каталог продукции</a>
+            </div>
+            <img src="img/bcg-header.jpg" alt="header">
+        </div>
+        <div class="header__slider__item">
+            <div class="header__slider__item__text">
+                <h2>Нержавеющий металлопрокат <br> <span>оптом в Новосибирске</span></h2>
+                <p>
+                    Основной деятельностью компании "Транссибметалл" является оптовая продажа <br>
+                    нержавеющего металлопроката. Конкурентоспособные цены, высокое качество <br>
+                    продукции залог долгосрочных взаимоотношений с нашими клиентами.
+                </p>
+                <a class="header__slider__item__text__btn btn-dat" href="#"><img src="img/datted.svg" alt="">В каталог продукции</a>
+            </div>
+            <img src="img/bcg-header.jpg" alt="header">
+        </div>
+        <div class="header__slider__item">
+            <div class="header__slider__item__text">
+                <h2>Нержавеющий металлопрокат <br> <span>оптом в Новосибирске</span></h2>
+                <p>
+                    Основной деятельностью компании "Транссибметалл" является оптовая продажа <br>
+                    нержавеющего металлопроката. Конкурентоспособные цены, высокое качество <br>
+                    продукции залог долгосрочных взаимоотношений с нашими клиентами.
+                </p>
+                <a class="header__slider__item__text__btn btn-dat" href="#"><img src="img/datted.svg" alt="">В каталог продукции</a>
+            </div>
+            <img src="img/bcg-header.jpg" alt="header">
+        </div>
+        <div class="header__slider__item">
+            <div class="header__slider__item__text">
+                <h2>Нержавеющий металлопрокат <br> <span>оптом в Новосибирске</span></h2>
+                <p>
+                    Основной деятельностью компании "Транссибметалл" является оптовая продажа <br>
+                    нержавеющего металлопроката. Конкурентоспособные цены, высокое качество <br>
+                    продукции залог долгосрочных взаимоотношений с нашими клиентами.
+                </p>
+                <a class="header__slider__item__text__btn btn-dat" href="#"><img src="img/datted.svg" alt="">В каталог продукции</a>
+            </div>
+            <img src="img/bcg-header.jpg" alt="header">
+        </div>
+        <div class="header__slider__item">
+            <div class="header__slider__item__text">
+                <h2>Нержавеющий металлопрокат <br> <span>оптом в Новосибирске</span></h2>
+                <p>
+                    Основной деятельностью компании "Транссибметалл" является оптовая продажа <br>
+                    нержавеющего металлопроката. Конкурентоспособные цены, высокое качество <br>
+                    продукции залог долгосрочных взаимоотношений с нашими клиентами.
+                </p>
+                <a class="header__slider__item__text__btn btn-dat" href="#"><img src="img/datted.svg" alt="">В каталог продукции</a>
+            </div>
+            <img src="img/bcg-header.jpg" alt="header">
+        </div>
+    </div>
+    <div class="header__slider__wrapper__number"></div>
+</div>

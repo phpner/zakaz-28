@@ -1,0 +1,26 @@
+.contact__header{
+  min-height: 350px;
+  background-image: url("../img/contact/header-contact.jpg");
+  background-position: center;
+  background-size: 100%;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &__text__wrap{
+    position: absolute;
+    bottom: 40px;
+    left: 215px;
+    color: #fff;
+    h1{
+      font-weight: 900;
+      font-size: 40px;
+      padding-bottom: 25px;
+    }
+    span{
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+}

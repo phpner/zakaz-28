@@ -1,0 +1,89 @@
+.catalog{
+  &__body{
+    background: #FBFBFB;
+    padding-top: 60px;
+    padding-bottom: 100px;
+  }
+  &__body__row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__body__col {
+    width: 27.333333%;
+    height: 281px;
+    margin: 19px 35px;
+    box-shadow: 0 0 7px 4px rgba(0, 0, 0, 0.11);
+    padding: 27px 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover{
+      background-color: $orange;
+    }
+    &:hover a{
+      color: #fff;
+    }
+    &:nth-child(1){
+      background-image: url(../img/catalog/1.png);
+      background-size: 254px;
+      background-position: 179% 100%;
+      background-repeat: no-repeat;
+    }
+    &:nth-child(2){
+      background-image: url(../img/catalog/2.png);
+      background-size: 254px;
+      background-position: 179% 87%;
+      background-repeat: no-repeat;
+    }
+    &:nth-child(3){
+      background-image: url(../img/catalog/3.png);
+      background-size: 254px;
+      background-position: 254% 103%;
+      background-repeat: no-repeat;
+    }
+    &:nth-child(4){
+      background-image: url(../img/catalog/4.png);
+      background-size: 254px;
+      background-position: 129% 98%;
+      background-repeat: no-repeat;
+    }
+    &:nth-child(5){
+      background-image: url(../img/catalog/5.png);
+      background-size: 163px;
+      background-position: 100% 98%;
+      background-repeat: no-repeat;
+    }
+    &:nth-child(6){
+      background-image: url(../img/catalog/6.png);
+      background-size: 326px;
+      background-position: 118px 90%;
+      background-repeat: no-repeat;
+    }
+    span{
+      color: #cacaca;
+      font-weight: 900;
+      font-size: 50px;
+      opacity: 0.3;
+    }
+  }
+
+  &__body__col__header {
+    h3{
+      font-weight: 800;
+      font-size: 28px;
+      text-transform: uppercase;
+    }
+    a{
+      font-weight: 600;
+      font-size: 14px;
+      color: $orange;
+      text-decoration: underline;
+      padding-top: 8px;
+      display: inline-block;
+    }
+  }
+}

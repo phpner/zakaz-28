@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2:300,400,500,700,900&display=swap');
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?oc76bd');
+  src:  url('../fonts/icomoon.eot?oc76bd#iefix') format('embedded-opentype'),
+  url('../fonts/icomoon.ttf?oc76bd') format('truetype'),
+  url('../fonts/icomoon.woff?oc76bd') format('woff'),
+  url('../fonts/icomoon.svg?oc76bd#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cross:before {
+  content: "\e911";
+  color: #fff;
+}
+.icon-minus:before {
+  content: "\e912";
+  color: #fff;
+}
+.icon-square:before {
+  content: "\e90e";
+  color: #ef672b;
+}
+.icon-print:before {
+  content: "\e90d";
+  color: #fff;
+}
+.icon-trak:before {
+  content: "\e900";
+  color: #ef672b;
+}
+.icon-arr:before {
+  content: "\e901";
+  color: #ef672b;
+}
+.icon-money:before {
+  content: "\e902";
+  color: #ef672b;
+}
+.icon-arrD:before {
+  content: "\e908";
+  color: #ef672b;
+}
+.icon-bag:before {
+  content: "\e90f";
+  color: #ef672b;
+}
+.icon-reload:before {
+  content: "\e910";
+  color: #ef672b;
+}
+.icon-airplane:before {
+  content: "\e903";
+  color: #fff;
+}
+.icon-cloud:before {
+  content: "\e904";
+  color: #fff;
+}
+.icon-datted:before {
+  content: "\e905";
+  color: #fff;
+}
+.icon-letter:before {
+  content: "\e906";
+  color: #fff;
+}
+.icon-letter2:before {
+  content: "\e907";
+  color: #acacac;
+}
+.icon-man:before {
+  content: "\e909";
+  color: #acacac;
+}
+.icon-pointer:before {
+  content: "\e90a";
+  color: #fff;
+}
+.icon-tel:before {
+  content: "\e90b";
+  color: #acacac;
+}
+.icon-zoom:before {
+  content: "\e90c";
+  color: #fff;
+}

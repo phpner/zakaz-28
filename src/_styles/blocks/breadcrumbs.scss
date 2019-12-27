@@ -1,0 +1,19 @@
+.breadcrumbs{
+  background: #F1F1F1;
+  padding: 10px 0;
+  a{
+    color: $orange;
+    font-size: 14px;
+    padding-right: 8px;
+  }
+  a:after{
+    content: "/";
+    position: relative;
+    left: 5px;
+    color: #969696;
+  }
+  span{
+    color: #969696;
+    font-size: 14px;
+  }
+}

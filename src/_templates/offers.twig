@@ -1,0 +1,55 @@
+{% extends "layout/base.twig" %}
+{% block title %}Специальные предложения{% endblock %}
+
+{% block haderbox %}
+    <section class="offers__header">
+        <div class="wrapper">
+            <div class="offers__header__text__wrap">
+                <h1>Специальные предложения</h1>
+                <span>Мы подготовили для Вас специальные и очень интересные предложения</span>
+            </div>
+            <a class="back__catalog" href="catalog.html"><i class="icon-arrD"></i>Вернуться в каталог</a>
+        </div>
+    </section>
+    <div class="breadcrumbs">
+        <div class="wrapper">
+            <a href="/">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <span>Специальные предложения</span>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="offers__body">
+        <div class="wrapper">
+            <div class="offers__body__item">
+                <h3>1. Прокат сортовой (круг) диам. 90 мм ХН35ВТ  пр-во Электросталь </h3>
+                <p><i class="icon-square"></i>300кг в наличии по цене 1400 руб/кг</p>
+            </div>
+            <div class="offers__body__item">
+                <h3>2. Листы перфорированные нержавеющие мс 304: </h3>
+                <p><i class="icon-square"></i>1*1000*2000 Rv2-3,5	AISI 304	 19	шт - 6000р./лист</p>
+                <p><i class="icon-square"></i>2*1000*2000 Rv2-4 	AISI 304	  3	шт - 15000р./лист </p>
+                <p><i class="icon-square"></i>3*1000*2000 Rv4-6  	AISI 304	 36	шт - 16000р./лист</p>
+            </div>
+            <div class="offers__body__item">
+                <h3>3. Прокат сортовой (круг): </h3>
+                <p><i class="icon-square"></i>15мм 10Х11Н20Т3Р (ЭИ696) - 480 000р./тн</p>
+                <p><i class="icon-square"></i>30мм 10Х11Н20Т3Р (ЭИ696) - 480 000р./тн</p>
+                <p><i class="icon-square"></i>60мм 10Х11Н20Т3Р (ЭИ 696) - 480 000р./тн</p>
+                <p><i class="icon-square"></i>160мм 10Х12Н20Т2-Ш  (ЭП452-ш) - 500 000р./тн</p>
+                <p><i class="icon-square"></i>180мм 10Х12Н20Т2-Ш  (ЭП 452-ш) - 500 000р./тн</p>
+            </div>
+            <div class="offers__body__item">
+                <h3>4. Трубы:</h3>
+                <p><i class="icon-square"></i>20х2,5х4100  02Х18Н11/03Х18Н11  8 тн  -  398 000р./тн</p>
+                <p><i class="icon-square"></i>38х2х3000  02Х18Н11/03Х18Н11  0,5тн  - 380 000р./тн </p>
+            </div>
+            <a class="print-btn" href="javascript:window.print(); void 0;"><i class="icon-print"></i>Распечатать спец.предложение</a>
+        </div>
+    </div>
+    {% include "/includes/questions.twig" %}
+{% endblock %}

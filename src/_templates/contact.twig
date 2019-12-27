@@ -1,0 +1,58 @@
+{% extends "layout/base.twig" %}
+{% block title %}Наши контакты транссиб ТМ металл{% endblock %}
+
+{% block haderbox %}
+    <section class="contact__header">
+        <div class="catalog__text__wrap">
+            <h1>Наши контакты</h1>
+            <span>Мы всегда очень рады сотрудничеству с новыми клиентами</span>
+        </div>
+    </section>
+    <div class="breadcrumbs">
+        <div class="wrapper">
+            <a href="/">Главная</a>
+            <span>Контакты</span>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block content %}
+<div class="contact__body">
+    <div class="wrapper">
+        <div class="contact__body__row">
+            <div class="contact__body__col">
+                <span class="contact__body__title">Телефоны для справок:</span>
+                <a href="tel:+73833195545"><i class="icon-tel"></i>+7 (383) 319 55 45</a>
+                <a href="tel:+73833195546"><i class="icon-tel"></i>+7 (383) 319 55 46</a>
+            </div>
+            <div class="contact__body__col">
+                <span class="contact__body__title">Электронная почта:</span>
+                <a href="mailto:info@transsibmetall.ru"><i class="icon-letter-opacity"></i>info@transsibmetall.ru</a>
+                <a href="tel:+73833195546"><i class="icon-letter-opacity"></i>2731130@mail.ru</a>
+            </div>
+            <div class="contact__body__col">
+                <span class="contact__body__title">Адрес офиса:</span>
+                <p>
+                    630105, а/я 254 г. Новосибирск, <br>
+                    ул. Кропоткина, 271, 9 этаж
+                </p>
+            </div>
+            <div class="contact__body__col">
+                <span class="contact__body__title">Адрес нашего склада:</span>
+                <p>
+                    г. Новосибирск, ул. Тайгинская 6
+                </p>
+            </div>
+        </div>
+        <div class="map">
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A11620ad20a3cfdd079412a0eb992c6c7ca9f97b06e34c625e1fb370414a7f5fa&amp;width=100%25&amp;height=100%&amp;lang=ru_UA&amp;scroll=true"></script>
+        </div>
+        <div class="print-btn__wrapp">
+            <a class="print-btn" href="javascript:window.print(); void 0;"><i class="icon-print"></i>Распечатать контактнные данные</a>
+       </div>
+    </div>
+</div>
+    {% include "/includes/questions.twig" %}
+{% endblock %}
