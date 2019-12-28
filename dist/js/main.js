@@ -414,7 +414,7 @@ $(document).ready(function($){
         var sizeCh = "";
 
         console.log(response);
-        console.log(response.param);
+
 
         for (var kyePP in response.param){
 
@@ -472,9 +472,7 @@ $(document).ready(function($){
                         "</div>");
                 }
 
-
                 name += response.row[kyeP].name;
-
 
             }else {
                 /*Название*/
@@ -485,8 +483,6 @@ $(document).ready(function($){
                     " <div class='filderAjax__col__item'>"+rendomNum()+"</div>" +
                     " <div class='filderAjax__col__item'>"+rendomNum()+"</div>" +
                     "</div></div>");
-
-
 
             }
             aldSize = size;

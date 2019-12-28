@@ -1,5 +1,9 @@
 <?php
 
+$param = parse_ini_file('congig.ini');
+
+var_dump($param);
+
 $user = "root";
 $pass = "";
 $dbh = new PDO('mysql:host=localhost;dbname=zakaz-28', $user, $pass);
@@ -28,6 +32,11 @@ if (!empty($item) && !$diamParameter){
 if ($diamParameter){
     getByParameter($dbh,$diam,$tableFilter,$item);
 }
+
+/**
+ * @param $dbh
+ * @param $table
+ */
 function getAll($dbh,$table ){
 
     $sql = "SELECT * FROM ".$table;
@@ -35,30 +44,19 @@ function getAll($dbh,$table ){
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-    $size = [];
-    foreach ($rows as $row){
-        $size[] = ['id' => $row['id'],'size' => $row['size']];
-    }
-
-    $result = array_filter($size, function($el) use ($size) {
-        foreach ($size as $k => $v) {
-            if ($el['size'] == $k && $v['size'] == 1) {
-                return $el;
-            }
-        }
-    });
-
-
-print_r($result);
-
-die();
-    sort($result);
-
+    $diameter =  filterDiameter($rows);
 
     header('Content-Type: application/json');
-    echo json_encode(["row" => $rows, "param" => $result],JSON_OBJECT_AS_ARRAY);
+    echo json_encode(["row" => $rows, "param" => $diameter],JSON_OBJECT_AS_ARRAY);
     die();
 }
+
+/**
+ * @param $dbh
+ * @param $item
+ * @param $diam
+ * @param $table
+ */
 
 function getFilter($dbh,$item, $diam,$table){
     try {
@@ -98,6 +96,12 @@ function getFilter($dbh,$item, $diam,$table){
     }
 }
 
+/**
+ * @param $dbh
+ * @param $diam
+ * @param $table
+ * @param $item
+ */
 function getByParameter($dbh,$diam, $table, $item){
 
     $newArra = [];
@@ -168,6 +172,40 @@ function getByParameter($dbh,$diam, $table, $item){
     header('Content-Type: application/json');
     echo json_encode(["row" => $newAfteArra, "param" => ""],JSON_OBJECT_AS_ARRAY);
     die();
+}
+
+/**
+ * @param $diameter
+ * @return array
+ */
+function filterDiameter($diameter){
+
+    $size = [];
+    foreach ($diameter as $row){
+        $size[] = $row['size'];
+    }
+
+    $elCounts = array_count_values($size);
+
+    $resultFilter = array_filter($diameter,function ($el) use($elCounts){
+        $arr = [];
+        foreach ($elCounts as $k => $v){
+            if ($el['size'] == $k && $v == 1){
+                return $el;
+            }
+        }
+    });
+
+    $diameterRes = array_map(function ($el){
+        unset($el['name']);
+        unset($el['sort']);
+        unset($el['thickness']);
+        unset($el['cost']);
+        unset($el['sort']);
+        return $el;
+    },$resultFilter);
+
+    return $diameterRes;
 }
 
 ?>
