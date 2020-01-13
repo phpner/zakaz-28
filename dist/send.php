@@ -21,20 +21,39 @@ $data = (date('d ') . $monthes[(date('n'))] . date(' Y, H:i:s'));
 
 $message = "Дата: $data <br>";
 
-foreach ($_POST as $name => $val) {
-    if ($name == 'name') {
-         $message .= "Имя - ".$val."<br>";      
-    }elseif ($name == 'tel') {
-         $message .= "Телефон - ".$val."<br>";
-        
-    }elseif ($name == 'email') {
-         $message .= "Почта - ".$val."<br>";
-        
-    }else{
-         $message .= $name." - ".$val."<br>";
-    }
-   
+if (isset($_POST['formType'])){
+    $message .= "Форма - ".$_POST['formType']."<br>";
 }
+if (isset($_POST['name'])){
+    $message .= "Имя - ".$_POST['name']."<br>";
+}
+
+if (isset($_POST['tel'])){
+    $message .= "Телефон - ".$_POST['tel']."<br>";
+}
+
+if (isset($_POST['email'])){
+    $message .= "Почта - ".$_POST['email']."<br>";
+}
+
+if (isset($_POST['inputName'])){
+    $message .= "Название товара - ".$_POST['inputName']."<br>";
+}
+
+if (isset($_POST['inputPrice'])){
+    $message .= "Цена на сайте - ".$_POST['inputPrice']."<br>";
+}
+
+if (isset($_POST['inputQuant'])){
+    $message .= "Кол-во ".$_POST['inputQuant']."<br>";
+}
+
+if (isset($_POST['inputSize'])){
+    $message .= "Размер ".$_POST['inputSize']."<br>";
+}
+
+
+
 
 // Отправляем письмо при помощи функции mail();
 
@@ -47,6 +66,7 @@ foreach ($_POST as $name => $val) {
 
 mail ($to, $subject, $message, $headers);
 
-header('Location: thanks.html');
+header('Location: thanks.php');
+exit();
 
 ?>

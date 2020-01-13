@@ -34,8 +34,9 @@
 					<span>Наши контакты:</span>
 						<a class="footer__col__right__top__contact__tel" href="tel:+73833195546">+7 (383) 319 55 46</a>
 						<a class="footer__col__right__top__contact__tel" href="tel:+73833195546">+7 (383) 319 55 45</a>
-						<a href="emailto:info@transsibmetall.ru"><i class="icon-letter-opacity"></i>info@transsibmetall.ru</a>
-						<a href="emailto:2731130@mail.ru"><i class="icon-letter-opacity"></i>2731130@mail.ru</a>
+						<img src="img/email.png" alt="">
+						<img style="width: 140px; margin-top: 5px" src="img/email-2-w.png" alt="">
+
 				</div>
 
 			</div>
@@ -62,6 +63,27 @@
 				<input type="text" name="name" placeholder="Ваше имя" required>
 				<input type="text" name="email" placeholder="E-mail" required>
 				<input type="submit" value="отправить">
+			</form>
+
+			<form class="mfp-hide white-popup-block form__item__buy" id="test-subscribe" method="post" action="send.php">
+				<span class="headerInner">Подписаться на прайс-лист</span>
+				<div class="form__item__buy__wrap">
+					<input type="number"   name="quant" placeholder="Кол-во м." required>
+					<input type="text" name="name" placeholder="Ваше имя" required>
+					<input type="email" name="email" placeholder="E-mail" required>
+					<input type="text" name="tel" placeholder="Тел" required>
+				</div>
+				<div class="total__price">Цена <span class="priceIN"></span></div>
+				<input type="hidden" name="totalPrice">
+				<input  type="hidden" name="formType" value="Форма заказа">
+				<input class="inputSize" type="hidden" name="inputSize">
+				<input class="inputName" type="hidden" name="inputName">
+				<input class="inputPrice" type="hidden" name="inputPrice">
+				<input class="inputQuant" type="hidden" name="inputQuant">
+				<div class="submit__box">
+					<img src="img/basket_white.png" alt="">
+					<input type="submit" value="Заказать">
+				</div>
 			</form>
 		</div>
 	</div>

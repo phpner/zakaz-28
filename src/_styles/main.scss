@@ -132,6 +132,9 @@
   .photo__col{
     height: 250px;
   }
+  .header__top__flex {
+    min-width: 390px;
+  }
 }
 
 /* Medium Devices, Desktops */
@@ -186,6 +189,9 @@
   }
   .truby__header .back__catalog, .offers__header .back__catalog {
     margin-top: 20px;
+  }
+  .header__top__flex {
+    min-width: 366px;
   }
 }
 
@@ -245,6 +251,7 @@
     display: flex;
     justify-content: center;
     padding-top: 20px;
+    align-items: center;
   }
   .header__slider .slick-dots{
     display: flex;
@@ -400,6 +407,9 @@
   .hamburger img{
     display: none!important;
   }
+  .header #logo{
+    max-width: 320px;
+  }
 }
 
 /* Small Devices, Tablets */
@@ -473,6 +483,12 @@
   .form__subscribe {
     width: 90%;
   }
+  .header__top__active{
+    overflow: hidden;
+  }
+  .filter-body .filderAjax__col__row .filderAjax__col__item .buy-btn {
+    padding: 10px 9px;
+  }
 }
 
 /* Extra Small Devices, Phones */
@@ -528,8 +544,8 @@
     margin: auto;
   }
   .header__top__mob img{
-    width: 192px;
-    height: 34px;
+    width: calc(100% - 110px);
+    /* height: 34px; */
     margin-right: auto;
     margin-left: 25px;
   }
@@ -662,6 +678,17 @@
     font-size: 23px;
     padding-left: 25px;
     padding-right: 25px;
+  }
+  .header__top__flex {
+    justify-content: center;
+    align-items: center;
+  }
+  .header #logo {
+    width: 50%;
+    height: 51px;
+  }
+  .weight-filter{
+    width: 20%!important;
   }
 }
 

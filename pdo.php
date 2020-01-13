@@ -30,88 +30,50 @@ if (!empty($item) && !$diamParameter){
 if ($diamParameter){
     getByParameter($dbh,$diam,$tableFilter,$item);
 }
-
-/**
- * @param $dbh
- * @param $table
- */
 function getAll($dbh,$table ){
 
     $sql = "SELECT * FROM ".$table;
     $stmt = $dbh->query($sql);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $diameter =  array_unique(array_column($rows,'size'));
-
-    $arrNames = array_unique(array_column($rows, 'name'));
-
-
-    $dateBody = array_map(function($ro) use($rows){
-
-                    foreach ($rows as  $row){
-                        if ($ro == $row['name']){
-                            $dateAee[$ro][] =  $row;
-                        }
-                    }
-                        return $dateAee;
-
-            },$arrNames);
-
-
-    $body  = makeHtmlBody($dateBody);
-    $names = makeHtmlNames($arrNames);
-    $diameter = makeHtmlDiameter($diameter);
-
-    $html = ['body' => $body, "names" => $names, "diameter" => $diameter];
+    $sql = "SELECT size, id FROM ".$table;
+    $stmt = $dbh->query($sql);
+    $rowsParam = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     header('Content-Type: application/json');
-    echo json_encode($html,JSON_OBJECT_AS_ARRAY);
+    echo json_encode(["row" => $rows, "param" => $rowsParam],JSON_OBJECT_AS_ARRAY);
     die();
 }
 
-/**
- * @param $dbh
- * @param $item
- * @param $diam
- * @param $table
- */
-
-function getFilter($dbh,$item,$table){
+function getFilter($dbh,$item, $diam,$table){
     try {
-        $dateBody = [];
-        print_r('empty!');
-        if (empty($item)){
-            print_r('empty!');
-            $sql = "SELECT * FROM ".$table;
-            $stmt = $dbh->query($sql);
-            $dateBody = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }else{
-            foreach ($item  as $value){
 
-                if ($value == "all"){
-                    continue;
-                }
+        $dataToGo = [];
+        foreach ($item  as $value){
 
-                $valueS = trim($value);
-                $sql = "SELECT * FROM ".$table." WHERE name = (SELECT name FROM ".$table." WHERE id = ".$valueS.")";
-                $zap = $dbh->query($sql);
-                foreach( $zap as $row) {
-                    $dateBody[] = $row;
-                }
+            if ($value == "all"){
+                continue;
+            }
 
+            $valueS = trim($value);
+            $sql = "SELECT * FROM ".$table." WHERE name = (SELECT name FROM ".$table." WHERE id = ".$valueS.")";
+            $zap = $dbh->query($sql);
+            foreach( $zap as $row) {
+                $dataToGo[] = $row;
+            }
+
+
+            $sql = "SELECT size,id FROM ".$table." WHERE name = (SELECT name FROM ".$table." WHERE id = ".$valueS.")";
+
+            $nameOf = $dbh->query($sql);
+            foreach($nameOf as $row) {
+                $rowsParam[] = $row;
             }
         }
 
 
-
-
-        $body  = makeHtmlBody($dateBody);
-        $diameter = makeHtmlDiameter($dateBody);
-
-        $html = ['body' => $body, "names" => '', "diameter" => $diameter];
-
         header('Content-Type: application/json');
-        echo json_encode($html,JSON_OBJECT_AS_ARRAY);
+        echo json_encode(["row" => $dataToGo, "param" => $rowsParam],JSON_OBJECT_AS_ARRAY);
         $dbh = null;
 
         die();
@@ -121,12 +83,6 @@ function getFilter($dbh,$item,$table){
     }
 }
 
-/**
- * @param $dbh
- * @param $diam
- * @param $table
- * @param $item
- */
 function getByParameter($dbh,$diam, $table, $item){
 
     $newArra = [];
@@ -197,121 +153,6 @@ function getByParameter($dbh,$diam, $table, $item){
     header('Content-Type: application/json');
     echo json_encode(["row" => $newAfteArra, "param" => ""],JSON_OBJECT_AS_ARRAY);
     die();
-}
-
-/**
- * @param $dateBody
- * @return array
- */
-function makeHtmlBody($dateBody){
-
-    usort($dateBody, function($a,$b){
-        return ($a['size']-$b['cost']);
-    });
-
-
-    $html = "";
-     array_map(function ($dateRe) use(&$html){
-            foreach ($dateRe as $key => $value){
-                    $html .= "<h3 id='header-".$key."' class='filderAjax__header'><div class='wrapper'><i class='icon-square'></i> ".$key."</div></h3>
-                              <div class='filderAjax__col'><div id='item-".$key."'></div></div>";
-
-                foreach ($value as $val){
-                        $html .="
-                                <div id='' class='filderAjax__col__row'><div class='wrapper'>
-                                <div class='filderAjax__col__item'>".$val['size']."</div>
-                                <div class='filderAjax__col__item'>".$val['cost']."</div>
-                                <div class='filderAjax__col__item'></div>
-                                <div class='filderAjax__col__item'></div>
-                                </div></div>";
-                    }
-            }
-            return $html;
-        },$dateBody);
-
-        return $html;
-}
-
-/**
- * @param $names
- * @return string
- */
-
-function makeHtmlNames($names){
-    $nameOut = "";
-    if (!empty($names)){
-
-        /*Выбрать марку стали: */
-        foreach ($names as $name){
-            $nameOut .=  "
-                           <div class=\"filter__col alax_col input_active\">
-                                <label>
-                                <input checked type='checkbox' value='".$name."'>
-                                         <span></span>
-                                         <p>".$name."</p>
-                                </label>
-                            </div>
-                           ";
-        }
-
-    }
-    return  $nameOut;
-}
-
-/**
- * @param $diameters
- * @return string
- */
-function makeHtmlDiameter($diameters){
-    $diameterOut = '';
-    if (!empty($diameters)){
-
-        foreach ($diameters as $val) {
-
-            $diameterOut .= "<div class='filter__col alax_col'>
-                                       <label>
-                                         <input type='checkbox' value='" . $val . "'>
-                                             <span></span>
-                                         <p>" . $val . "</p>
-                                </label>
-                            </div>";
-        }
-    }
-
-    return $diameterOut;
-}
-/**
- * @param $diameter
- * @return array
- */
-function filterDiameter($diameter){
-
-    $size = [];
-    foreach ($diameter as $row){
-        $size[] = $row['size'];
-    }
-
-    $elCounts = array_count_values($size);
-
-    $resultFilter = array_filter($diameter,function ($el) use($elCounts){
-        $arr = [];
-        foreach ($elCounts as $k => $v){
-            if ($el['size'] == $k && $v == 1){
-                return $el;
-            }
-        }
-    });
-
-    $diameterRes = array_map(function ($el){
-        unset($el['name']);
-        unset($el['sort']);
-        unset($el['thickness']);
-        unset($el['cost']);
-        unset($el['sort']);
-        return $el;
-    },$resultFilter);
-
-    return $diameterRes;
 }
 
 ?>

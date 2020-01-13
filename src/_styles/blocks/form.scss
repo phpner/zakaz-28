@@ -101,3 +101,83 @@
         margin-top: 35px;
     }
 }
+
+/*form buy*/
+
+.form__item__buy{
+    background: #e8e8e8;
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    .headerInner p{
+        display: inline-block;
+    }
+    .headerInner .title_For{
+        font-weight: 600;
+        color: #a7a7a7;
+        padding-right: 12px;
+        font-size: 17px;
+        font-style: italic;
+    }
+    span{
+        flex-wrap: wrap;
+        margin: 15px 0 14px;
+        font-size: 19px;
+        font-weight: 500;
+        padding-bottom: 8px;
+        line-height: 1.4;
+    }
+    .priceIN{
+        color: #ffffff;
+        font-weight: 700;
+        background: #ef672b;
+        padding: 3px 8px;
+        border-radius: 5px;
+        box-shadow: 3px 4px 1px 1px rgba(0, 0, 0, 0.16);
+    }
+    .form__item__buy__wrap{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+     input[type=text],input[type=number], input[type=email]{
+         height: 40px;
+         border: none;
+         box-shadow: 0 0 1px black;
+         border-radius: 8px;
+         padding: 8px;
+         margin: 10px 8px;
+         width: 46%;
+     }
+     input[type=submit] {
+        background: #ef672b;
+        color: #fff;
+        display: block;
+        padding: 20px 15px;
+        margin: auto;
+        width: 250px;
+        border: none;
+        margin-top: 14px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.5s;
+         &:hover{
+             background:lighten(#ef672b,10%);
+         }
+    }
+    .submit__box{
+        display: inline-block;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        img{
+            position: absolute;
+            top: 36px;
+            left: 45px;
+        }
+    }
+}

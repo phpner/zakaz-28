@@ -154,15 +154,15 @@
 				<input type="submit" value="отправить">
 			</form>
 
-			<form class="mfp-hide white-popup-block form__item__buy" id="test-subscribe" method="post" action="send.php">
+			<form class="mfp-hide white-popup-block form__item__buy" id="test-subscribe" method="get" action="send.php">
 				<span class="headerInner">Подписаться на прайс-лист</span>
 				<div class="form__item__buy__wrap">
-					<input type="number"   name="quant" placeholder="Кол-во м." required>
+					<input type="number" name="quant" placeholder="Кол-во м." required>
 					<input type="text" name="name" placeholder="Ваше имя" required>
-					<input type="email" name="email" placeholder="E-mail" required>
+					<input type="text" name="email" placeholder="E-mail" required>
 					<input type="text" name="tel" placeholder="Тел" required>
 				</div>
-				<div class="total__price">Цена <span class="priceIN"></span></div>
+				<div class="total__price">Цена <span></span></div>
 				<input type="hidden" name="totalPrice">
 				<input  type="hidden" name="formType" value="Форма заказа">
 				<input class="inputSize" type="hidden" name="inputSize">

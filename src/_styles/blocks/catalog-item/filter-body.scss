@@ -26,21 +26,39 @@
       border: 1px solid #f1f1f1;
       border-right: none;
       border-left: none;
-      padding: 14px 0;
+      padding: 8px 0;
       .filderAjax__col__item{
         font-weight: 600;
         font-size: 16px;
         color: #000;
+        .buy-btn{
+          background: url("../img/basket.png") center center no-repeat;
+          background-size: 20px 16px;
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          padding: 15px 25px;
+          border: 1px solid transparent;
+          transition: background 0.4s;
+          &:hover{
+
+            border: 1px solid rgba(125, 125, 125, 0.53);
+            border-radius: 5px;
+            box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.33);
+            background: url("../img/basket_hover.png") center center no-repeat;
+            background-color: #e8e8e8;
+            background-size: 20px 16px;
+          }
+        }
       }
      .wrapper{
-       display: flex;
-       justify-content: space-between;
-       flex-wrap: wrap;
-
+       display: table;
      }
     }
     &__col__item{
-      width: 24.333333%
+      width: 20%;
+      display: table-cell;
+      vertical-align: middle;
     }
     &__header{
       background: #4B4B4B;
@@ -67,11 +85,19 @@
     }
   }
   &__header__col {
-    width: 33.333333%;
+    width:auto;
     p{
       font-weight: bold;
       font-size: 16px;
       color: #FFFFFF;
     }
   }
+}
+
+.filter-body__header .wrapper{
+  display: table;
+}
+
+.filderAjax__col__item:last-child, .filter-body__header__col:last-child{
+  text-align: center;
 }
