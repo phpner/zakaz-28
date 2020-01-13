@@ -14,7 +14,8 @@
     padding: 29px;
     box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.02);
     i{
-      font-size: 30px;
+      font-size: 40px;
+      padding-bottom: 8px;
     }
     &:last-child{
       margin-right: 0;
@@ -43,5 +44,6 @@
   &__col__header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
   }
 }

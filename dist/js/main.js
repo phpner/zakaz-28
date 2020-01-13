@@ -227,7 +227,6 @@ $(document).ready(function($){
 
             }else {
                 if (!$(parentBox).hasClass("filter__box__diam")){
-                    $(".filter__box__diam .filter__col__left").html('');
                     all = false;
                 }
 
@@ -321,9 +320,7 @@ $(document).ready(function($){
             type: "JSON",
             data: dataJson,
             success: function(response) {
-                var arrData = [];
-                var str = '';
-                var dataTo = "<div class='filderAjax__col'></div>";
+
                 makeView(response,false, true);
             },
             error: function (er) {
@@ -364,8 +361,6 @@ $(document).ready(function($){
             type: "POST",
             data: table,
             success: function(response) {
-                $(".filter__box__diam .filter__col__left").html('');
-                $(".filter__box__name .filter__col__left").html('');
 
                 $(".filter__box__name .filter__col__left").append('<div class="filter__col title input_active">\n' +
                     '           <label>\n' +
@@ -383,110 +378,45 @@ $(document).ready(function($){
                 console.log(er.responseText)
             }
         });
-
     }
 
     /*append response*/
-    function makeView(response,noFirst,is_param, all) {
-        $(".filter-body__center__innder").html('');
-        /*Проверка на пустоту))*/
-        if (!is_param) {
-            $(".filter__box__diam .filter__col__left").html('');
-      /*      if (all){
-                $(".filter__box__diam .filter__col__left").append('<div class="filter__col title ">\n' +
-                    '           <label>\n' +
-                    '                <input type="checkbox" value="all">\n' +
-                    '                     <span></span>\n' +
-                    '                     <p>Все</p>\n' +
-                    '           </label>\n' +
-                    '</div>');
-            }*/
-            }
+    function makeView(response,noFirst,is_param) {
 
 
+        /*Проверка на пустоту*/
         if (typeof response == 'undefined' || response == 'no' ||   response.length <= 0) {
-            console.log('пусто!')
-            $(".filter-body__center__innder").html("<span class='no__found'>Ничего не найдено!<span>");
+            console.log('пусто!');
+            innerCenter.html("<span class='no__found'>Ничего не найдено!<span>");
             return;
         }
 
-        var name ='';
-        var sizeCh = "";
+        var innerCenter = document.querySelector(".filter-body__center__innder");
+        var innerNames = document.querySelector(".filter__box__name .filter__col__left");
+        var innerDiameters = document.querySelector(".filter__box__diam .filter__col__left");
 
-        console.log(response);
+        innerCenter.innerHTML       = '';
+        if (typeof  response.names !== 'undefined' ||  response.names == ''){
+            innerNames.innerHTML        = '';
+            innerNames.innerHTML        =   '<div class="filter__col title input_active">\n' +
+                '           <label>\n' +
+                '                <input type="checkbox" value="all" checked="checked">\n' +
+                '                     <span></span>\n' +
+                '                     <p>Все</p>\n' +
+                '           </label>\n' +
+                '</div>';
 
-
-        for (var kyePP in response.param){
-
-            var sizeTr = response.param[kyePP].size;
-
-            if (sizeCh.indexOf(sizeTr) < 0){
-                if (!is_param) {
-                    $(".filter__box__diam .filter__col__left").append("<div class=\"filter__col alax_col\">\n" +
-                        "    <label>\n" +
-                        "             <input type=\"checkbox\" value=\"" + response.param[kyePP].id + "\">\n" +
-                        "             <span></span>\n" +
-                        "          <p>" + response.param[kyePP].size + "</p>\n" +
-                        "    </label>\n" +
-                        "</div>");
-                }
-            }
-
-            sizeCh +=  sizeTr;
+            innerNames.innerHTML +=  response.names;
         }
-        for (var kyeP in response.row){
 
-            var size = response.row[kyeP].size;
-            var aldSize = "";
-            var cost = response.row[kyeP].cost;
-            var id = response.row[kyeP].id;
-            var innner  = $(".filter-body__center__innder");
+        innerDiameters.innerHTML    = '';
 
+        console.log(response.body);
 
-            if ( name.indexOf(response.row[kyeP].name) < 0 ){
-                str = id;
+        innerCenter.innerHTML = response.body;
 
-                var app = "<h3 id='header-"+id+"' class='filderAjax__header'><div class='wrapper'><i class='icon-square'></i> "+response.row[kyeP].name+"</div></h3>" +
-                    "<div class='filderAjax__col'><div id='item-"+str+"'></div></div>";
+        innerDiameters.innerHTML += response.diameter;
 
-               innner.append(app);
-
-                /*Название*/
-               innner.find("#item-"+str).append("<div id='"+response.row[kyeP].id+"' class='filderAjax__col__row'>" +
-                    "<div class='wrapper'>" +
-                    "<div class='filderAjax__col__item'>"+size+"</div>" +
-                    " <div class='filderAjax__col__item'>"+cost+"</div>" +
-                    " <div class='filderAjax__col__item'>"+rendomNum()+"</div>" +
-                    " <div class='filderAjax__col__item'>"+rendomNum()+"</div>" +
-                    "</div></div>");
-
-                /*name*/
-                if (noFirst) {
-
-                    $(".filter__box__name .filter__col__left").append("<div class=\"filter__col alax_col input_active\">\n" +
-                        "    <label>\n" +
-                        "             <input checked type=\"checkbox\" value=\"" + response.row[kyeP].id + "\">\n" +
-                        "             <span></span>\n" +
-                        "          <p>" + response.row[kyeP].name + "</p>\n" +
-                        "    </label>\n" +
-                        "</div>");
-                }
-
-                name += response.row[kyeP].name;
-
-            }else {
-                /*Название*/
-               innner.find("#item-"+str).append("<div id='"+response.row[kyeP].id+"' class='filderAjax__col__row'>" +
-                    "<div class='wrapper'>" +
-                    "<div class='filderAjax__col__item'>"+size+"</div>" +
-                    " <div class='filderAjax__col__item'>"+cost+"</div>" +
-                    " <div class='filderAjax__col__item'>"+rendomNum()+"</div>" +
-                    " <div class='filderAjax__col__item'>"+rendomNum()+"</div>" +
-                    "</div></div>");
-
-            }
-            aldSize = size;
-        }
 
         if (arccorChack){
             arccor.accordion( "refresh" );
