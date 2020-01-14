@@ -31,7 +31,24 @@
     display: none;
   }
 }
-
+.contact__header{
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 115px;
+}
+.header__bg{
+  .header__wrap{
+    position: relative;
+  }
+}
+.body_thanks{
+  display: flex;
+  flex-direction: column;
+  .thanks__body{
+    flex: 1 1 100%;
+  }
+}
 .form__subscribe{
   width: 700px;
   background: #d2d2d2;
@@ -182,16 +199,21 @@
     margin: 10px;
   }
   /*truba*/
-  .truby__header .wrapper, .offers__header .wrapper {
+  .truby__header .wrapper, .offers__header .wrapper, .header__bg .wrapper{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
   }
-  .truby__header .back__catalog, .offers__header .back__catalog {
+  .truby__header .back__catalog, .offers__header .back__catalog, .header__bg .back__catalog{
     margin-top: 20px;
   }
   .header__top__flex {
     min-width: 366px;
+  }
+  .catalog, .contact__header{
+    margin-left: auto;
+    text-align: center;
   }
 }
 
@@ -489,6 +511,9 @@
   .filter-body .filderAjax__col__row .filderAjax__col__item .buy-btn {
     padding: 10px 9px;
   }
+  .form__item__buy input[type=text], .form__item__buy input[type=number], .form__item__buy input[type=email]{
+    width: 100%;
+  }
 }
 
 /* Extra Small Devices, Phones */
@@ -684,7 +709,7 @@
     align-items: center;
   }
   .header #logo {
-    width: 50%;
+    width: calc(100% - 115px);
     height: 51px;
   }
   .weight-filter{

@@ -112,6 +112,9 @@
     padding: 20px;
     position: relative;
     overflow: hidden;
+    .total__price{
+        margin-top: 15px;
+    }
     .headerInner p{
         display: inline-block;
     }
@@ -139,6 +142,7 @@
         box-shadow: 3px 4px 1px 1px rgba(0, 0, 0, 0.16);
     }
     .form__item__buy__wrap{
+
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;

@@ -12,7 +12,7 @@
             <!-- <link rel="stylesheet" href="css/style.min.css?v=3"> -->
         
     </head>
-    <body>
+    <body class="body_thanks">
     <header class="header" id="header">
         <div class="header__wrap">
     <div class="header__top__mob">
@@ -62,8 +62,6 @@
         </div>
     </div>
 </div>
-
-        
     <section class="contact__header">
         <div class="catalog__text__wrap">
             <h1>Ваша заявка принята!</h1>
@@ -77,17 +75,13 @@
         </div>
     </div>
 
-
-
     </header>
-
             
     <div class="thanks__body">
         <h2>Ваша заявка принята!</h2>
     </div>
 
-
-        <footer class="footer">
+<footer class="footer">
 	<div class="container">
 		<div class="footer__row">
 		<div class="footer__col__left">

@@ -1,7 +1,11 @@
 {% extends "layout/base.twig" %}
 {% block title %}Нержавеющая труба{% endblock %}
 
+
+
 {% block haderbox %}
+<div class="header__bg header__bg__truby">
+    {% include "/includes/header.twig" %}
     <section class="truby__header">
         <div class="wrapper">
         <div class="truby__text__wrap">
@@ -11,6 +15,11 @@
         <a class="back__catalog" href="catalog.html"><i class="icon-arrD"></i>Вернуться в каталог</a>
         </div>
     </section>
+
+</div>
+{% endblock %}
+
+{% block content %}
     <div class="breadcrumbs">
         <div class="wrapper">
             <a href="/">Главная</a>
@@ -18,8 +27,6 @@
             <span>Труба</span>
         </div>
     </div>
-{% endblock %}
-{% block content %}
     <div class="wrapper">
         <div class="filter" id="tube">
             <div class="filter__box__input filter__box__name">

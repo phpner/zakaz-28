@@ -2,12 +2,19 @@
 {% block title %}Каталог продукции{% endblock %}
 
 {% block haderbox %}
-<header class="catalog">
-    <div class="catalog__text__wrap">
-        <h1>Каталог продукции</h1>
-        <span>Мы всегда реализуем только качественные материалы, а также готовы <br> предоставить выгодные условия для наших клиентов </span>
-    </div>
-</header>
+<div class="header__bg header__bg__catalog">
+    {% include "/includes/header.twig" %}
+    <header class="catalog">
+        <div class="catalog__text__wrap">
+            <h1>Каталог продукции</h1>
+            <span>Мы всегда реализуем только качественные материалы, а также готовы <br> предоставить выгодные условия для наших клиентов </span>
+        </div>
+    </header>
+</div>
+
+{% endblock %}
+
+{% block content %}
     <div class="breadcrumbs">
         <div class="wrapper">
             <a href="/">Главная</a>
@@ -62,8 +69,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block content %}
-
 {% endblock %}

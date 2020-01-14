@@ -1,13 +1,18 @@
-.contact__header{
-  min-height: 350px;
+.header__bg__contact{
   background-image: url("../img/contact/header-contact.jpg");
+  min-height: 300px;
   background-position: center;
-  background-size: 100%;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+.contact__header{
+
   &__text__wrap{
-    position: absolute;
+
     bottom: 40px;
     left: 215px;
     color: #fff;

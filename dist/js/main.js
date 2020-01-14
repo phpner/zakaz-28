@@ -331,6 +331,8 @@ $(document).ready(function($){
             }
         });
     }
+
+
     /*filter by parameter*/
     function ajaxItem(item, all){
         diameter = typeof diameter !== 'undefined' ?  diameter : "";
@@ -375,7 +377,6 @@ $(document).ready(function($){
                     '           </label>\n' +
                     '</div>');
 
-
                 makeView(response,true,false,true);
 
             },
@@ -392,15 +393,6 @@ $(document).ready(function($){
         /*Проверка на пустоту))*/
         if (!is_param) {
             $(".filter__box__diam .filter__col__left").html('');
-      /*      if (all){
-                $(".filter__box__diam .filter__col__left").append('<div class="filter__col title ">\n' +
-                    '           <label>\n' +
-                    '                <input type="checkbox" value="all">\n' +
-                    '                     <span></span>\n' +
-                    '                     <p>Все</p>\n' +
-                    '           </label>\n' +
-                    '</div>');
-            }*/
             }
 
 
@@ -438,7 +430,6 @@ $(document).ready(function($){
             var innner  = $(".filter-body__center__innder");
 
             if ( name != response.row[kyeP].name ){
-
                 str = id;
 
                 var app = "<h3 id='header-"+id+"' class='filderAjax__header'><div class='wrapper'><i class='icon-square'></i> "+response.row[kyeP].name+"</div></h3>" +

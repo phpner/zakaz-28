@@ -1,3 +1,14 @@
+.header__bg__truby{
+  min-height: 300px;
+  background-image: url("../img/catalog-pages/header-truby.jpg");
+  background-position: center;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
 .truby{
   &__header{
     .back__catalog{
@@ -22,16 +33,12 @@
         color: #fff;
       }
     }
-    min-height: 350px;
-    background-image: url("../img/catalog-pages/header-truby.jpg");
-    background-position: center;
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: cover;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: auto;
+    margin-bottom: auto;
 
     .wrapper{
       display: flex;
@@ -42,7 +49,6 @@
   }
 
   &__text__wrap{
-
     color: #fff;
     h1{
       font-weight: 900;

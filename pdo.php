@@ -1,6 +1,5 @@
 <?php
 
-$param = parse_ini_file('congig.ini');
 
 $user = "root";
 $pass = "";
@@ -154,5 +153,7 @@ function getByParameter($dbh,$diam, $table, $item){
     echo json_encode(["row" => $newAfteArra, "param" => ""],JSON_OBJECT_AS_ARRAY);
     die();
 }
+
+ 
 
 ?>

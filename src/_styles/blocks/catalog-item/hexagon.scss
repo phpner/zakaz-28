@@ -1,5 +1,18 @@
+.header__bg__hexagon{
+  background-image: url("../img/catalog-pages/header-hexagon.jpg");
+  min-height: 300px;
+  background-position: center;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
 .hexagon{
   &__header{
+    margin-top: auto;
+    margin-bottom: auto;
     .back__catalog{
       background: $orange;
       padding-top: 20px;
@@ -22,16 +35,6 @@
         color: #fff;
       }
     }
-    min-height: 350px;
-    background-image: url("../img/catalog-pages/header-hexagon.jpg");
-    background-position: center;
-    position: relative;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
 
     .wrapper{
       display: flex;

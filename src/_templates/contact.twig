@@ -2,23 +2,25 @@
 {% block title %}Наши контакты транссиб ТМ металл{% endblock %}
 
 {% block haderbox %}
+<div class="header__bg header__bg__contact">
+    {% include "/includes/header.twig" %}
     <section class="contact__header">
         <div class="catalog__text__wrap">
             <h1>Наши контакты</h1>
             <span>Мы всегда очень рады сотрудничеству с новыми клиентами</span>
         </div>
     </section>
+</div>
+
+{% endblock %}
+
+{% block content %}
     <div class="breadcrumbs">
         <div class="wrapper">
             <a href="/">Главная</a>
             <span>Контакты</span>
         </div>
     </div>
-
-
-{% endblock %}
-
-{% block content %}
 <div class="contact__body">
     <div class="wrapper">
         <div class="contact__body__row">
