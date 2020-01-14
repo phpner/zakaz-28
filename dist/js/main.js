@@ -291,7 +291,8 @@ $(document).ready(function($){
                     item.push(this.value);
                 });
             }
-            ajaxParametr(item,diameter, false);
+
+            ajaxParametr(diameter);
         }
 
     });
@@ -308,23 +309,41 @@ $(document).ready(function($){
         return iconR;
     }
 
+    function reLoadFilter(load) {
+        if (load){
+            $(".filter-body").append("<img class='load-gif' src='img/load.gif'>");
+            $(".filter-body__header, .filter-body__center").css({opacity: "0.2"})
+        }
+        else {
+            $(".filter-body__header, .filter-body__center").css({opacity: "1"})
+            $(".load-gif").remove();
+        }
+    }
     /*  console.log(dataJson);*/
-    function ajaxParametr(item,diameter){
+    function ajaxParametr(diameter){
 
         diameter = typeof diameter !== 'undefined' ?  diameter : "";
 
         var tableName = $(".filter").attr('id');
-        dataJson =  JSON.stringify({"item":item ,"diam": diameter, "tableFilter" :tableName, "diamParameter": true});
+        dataJson =  JSON.stringify({"diam": diameter, "tableFilter" :tableName, "diamParameter": true});
 
         $.ajax({
             url: "/pdo.php",
             type: "JSON",
             data: dataJson,
+            beforeSend:function(){
+                reLoadFilter(true);
+            },
             success: function(response) {
-                var arrData = [];
-                var str = '';
-                var dataTo = "<div class='filderAjax__col'></div>";
-                makeView(response,false, true);
+                reLoadFilter(false);
+                console.log(response)
+                if (!checkFilterResult(response))
+                    return;
+
+                $(".filter-body__center__innder").html(response.row);
+                if (arccorChack){
+                    arccor.accordion( "refresh" );
+                }
             },
             error: function (er) {
                 console.log(er.responseText)
@@ -332,9 +351,8 @@ $(document).ready(function($){
         });
     }
 
-
     /*filter by parameter*/
-    function ajaxItem(item, all){
+    function ajaxItem(item){
         diameter = typeof diameter !== 'undefined' ?  diameter : "";
         var tableName = $(".filter").attr('id');
         dataJson =  JSON.stringify({'item': item, "diam": diameter, "tableFilter" :tableName, "diamParameter": false});
@@ -342,9 +360,23 @@ $(document).ready(function($){
             url: "/pdo.php",
             type: "JSON",
             data: dataJson,
+            beforeSend:function(){
+                reLoadFilter(true);
+            },
             success: function(response) {
+                reLoadFilter(false);
 
-                makeView(response,false, false, all);
+                if (!checkFilterResult(response))
+                    return;
+
+                $(".filter__box__diam .filter__col__left").html('');
+
+                $(".filter__box__diam .filter__col__left").append(response.param);
+                $(".filter-body__center__innder").html(response.row);
+
+                if (arccorChack){
+                    arccor.accordion( "refresh" );
+                }
 
             },
             error: function (er) {
@@ -365,7 +397,15 @@ $(document).ready(function($){
             url: "/pdo.php",
             type: "POST",
             data: table,
+            beforeSend:function(){
+                reLoadFilter(true);
+            },
             success: function(response) {
+                reLoadFilter(false);
+
+                if (!checkFilterResult(response))
+                    return;
+
                 $(".filter__box__diam .filter__col__left").html('');
                 $(".filter__box__name .filter__col__left").html('');
 
@@ -375,10 +415,14 @@ $(document).ready(function($){
                     '                     <span></span>\n' +
                     '                     <p>Все марки</p>\n' +
                     '           </label>\n' +
-                    '</div>');
+                    '</div>')
+                    .append(response.names);
 
-                makeView(response,true,false,true);
-
+                $(".filter__box__diam .filter__col__left").append(response.param);
+                $(".filter-body__center__innder").append(response.row);
+                if (arccorChack){
+                    arccor.accordion( "refresh" );
+                }
             },
             error: function (er) {
                 console.log(er.responseText)
@@ -387,103 +431,16 @@ $(document).ready(function($){
 
     }
 
-    /*append response*/
-    function makeView(response,noFirst,is_param, all) {
-        $(".filter-body__center__innder").html('');
-        /*Проверка на пустоту))*/
-        if (!is_param) {
-            $(".filter__box__diam .filter__col__left").html('');
-            }
-
-
+    function checkFilterResult(response) {
         if (typeof response == 'undefined' || response == 'no' ||   response.length <= 0) {
             console.log('пусто!')
             $(".filter-body__center__innder").html("<span class='no__found'>Ничего не найдено!<span>");
-            return;
+            return false;
         }
-
-        var name ='';
-        var sizeCh = "";
-
-        for (var kyePP in response.param){
-
-            if (sizeCh.indexOf( response.param[kyePP].size) < 0){
-                if (!is_param) {
-                    $(".filter__box__diam .filter__col__left").append("<div class=\"filter__col alax_col\">\n" +
-                        "    <label>\n" +
-                        "             <input type=\"checkbox\" value=\"" + response.param[kyePP].id + "\">\n" +
-                        "             <span></span>\n" +
-                        "          <p>" + response.param[kyePP].size + "</p>\n" +
-                        "    </label>\n" +
-                        "</div>");
-                }
-            }
-
-            sizeCh +=  response.param[kyePP].size
-        }
-        for (var kyeP in response.row){
-
-            var size = response.row[kyeP].size;
-            var aldSize = "";
-            var cost = response.row[kyeP].cost;
-            var id = response.row[kyeP].id;
-            var innner  = $(".filter-body__center__innder");
-
-            if ( name != response.row[kyeP].name ){
-                str = id;
-
-                var app = "<h3 id='header-"+id+"' class='filderAjax__header'><div class='wrapper'><i class='icon-square'></i> "+response.row[kyeP].name+"</div></h3>" +
-                    "<div class='filderAjax__col'><div id='item-"+str+"'></div></div>";
-
-               innner.append(app);
-
-                /*Название*/
-               innner.find("#item-"+str).append("<div id='"+response.row[kyeP].id+"' class='filderAjax__col__row'>" +
-                    "<div class='wrapper'>" +
-                    "<div class='filderAjax__col__item'>"+size+"</div>" +
-                    " <div class='filderAjax__col__item'>"+cost+"</div>" +
-                    " <div class='filderAjax__col__item weight-filter'>"+rendomNum()+"</div>" +
-                    " <div class='filderAjax__col__item weight-filter'>"+rendomNum()+"</div>" +
-                   "<div class='filderAjax__col__item'><a class='buy-btn' data-name='"+response.row[kyeP].name+"' data-size='"+size+"' data-price='"+cost+"'  href='#'></a></div>" +
-                    "</div></div>");
-
-                /*name*/
-                if (noFirst) {
-
-                    $(".filter__box__name .filter__col__left").append("<div class=\"filter__col alax_col input_active\">\n" +
-                        "    <label>\n" +
-                        "             <input checked type=\"checkbox\" value=\"" + response.row[kyeP].id + "\">\n" +
-                        "             <span></span>\n" +
-                        "          <p>" + response.row[kyeP].name + "</p>\n" +
-                        "    </label>\n" +
-                        "</div>");
-                }
-
-
-                name = response.row[kyeP].name;
-
-            }else {
-                /*Название*/
-               innner.find("#item-"+str).append("<div id='"+response.row[kyeP].id+"' class='filderAjax__col__row'>" +
-                    "<div class='wrapper'>" +
-                    "<div class='filderAjax__col__item'>"+size+"</div>" +
-                    " <div class='filderAjax__col__item'>"+cost+"</div>" +
-                    " <div class='filderAjax__col__item weight-filter'>"+rendomNum()+"</div>" +
-                    " <div class='filderAjax__col__item weight-filter'>"+rendomNum()+"</div>" +
-                   "<div class='filderAjax__col__item'><a class='buy-btn' data-name='"+name+"' data-size='"+size+"' data-price='"+cost+"'  href='#'></a></div>" +
-                    "</div></div>");
-
-
-
-            }
-            aldSize = size;
-        }
-
-        if (arccorChack){
-            arccor.accordion( "refresh" );
-        }
+        return true;
     }
 
+    /*Отправка заказа*/
     $(document).on("click", ".buy-btn",function(event){
         event.preventDefault();
 
