@@ -1,23 +1,20 @@
 <?php
-
-
+/*Подключение к БД*/
 $user = "root";
 $pass = "";
 $dbh = new PDO('mysql:host=localhost;dbname=zakaz-28', $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+/*Получение данных*/
 $fromPost = json_decode(file_get_contents('php://input'));
 
 $item = $fromPost->item;
 $diam = $fromPost->diam;
 $diamParameter = $fromPost->diamParameter;
 $tableFilter = $fromPost->tableFilter;
-
-
-
 $table = (isset($_POST['table'])) ? $_POST['table'] : '' ;
 
-
+/*Проверка и запуск нужной функции*/
 if (!empty($table)){
     getInit($dbh,$table );
 }
@@ -28,6 +25,35 @@ if (!empty($item) && !$diamParameter){
 
 if ($diamParameter){
     filterBySize($dbh,$diam,$tableFilter);
+}
+
+/*Шлак для файк данных*/
+function rendomNum() {
+    $fake = "";
+    $i = rand(1,5);
+
+    for ($i; $i<=5; $i++){
+        $fake .= "<i class=' icon-bag'></i>";
+    }
+    return $fake;
+}
+
+/**
+ * @param $data
+ * @param $kye
+ * @return array
+ */
+function filterFormHtml($data, $kye){
+    $temp_array = array();
+    $key_array = array();
+
+    foreach($data as $val) {
+        if (!in_array($val[$kye], $key_array)) {
+            $key_array[] = $val[$kye];
+            $temp_array[] = ['id' => $val['id'],$kye => $val[$kye]];
+        }
+    }
+    return $temp_array;
 }
 
 /**
@@ -47,6 +73,7 @@ function getInit($dbh,$table ){
 
     header('Content-Type: application/json');
     echo json_encode(["row" => $htmlBody, "param" => $htmlSize,'names' => $htmlName],JSON_OBJECT_AS_ARRAY);
+    $dbh = null;
     die();
 }
 
@@ -55,10 +82,10 @@ function getInit($dbh,$table ){
  * @param $item
  * @param $table
  */
-function filterByName($dbh,$item,$table){
+function filterByName($dbh,$itemId,$table){
     $rows = [];
     try {
-        foreach ($item  as $id){
+        foreach ($itemId  as $id){
             if ($id == "all"){
                 continue;
             }
@@ -70,16 +97,14 @@ function filterByName($dbh,$item,$table){
             foreach($stmt as $row) {
                 $rows[] = $row;
             }
-
         }
 
-        $htmlSize = renderHtmlSize($rows);
+        $htmlSize =  renderHtmlSize($rows);
         $htmlBody =  renderHtml($rows);
 
         header('Content-Type: application/json');
         echo json_encode(["row" => $htmlBody, "param" => $htmlSize],JSON_OBJECT_AS_ARRAY);
         $dbh = null;
-
         die();
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -105,26 +130,20 @@ function filterBySize($dbh,$sizesId, $table){
                 $rows[] = $row;
             }
         }
+
         $htmlBody =  renderHtml($rows);
+
         header('Content-Type: application/json');
         echo json_encode(["row" => $htmlBody],JSON_OBJECT_AS_ARRAY);
+        $dbh = null;
         die();
     }
 
         header('Content-Type: application/json');
         echo json_encode('no',JSON_OBJECT_AS_ARRAY);
+        $dbh = null;
         die();
 }
-/*Шлак для файк данных*/
-function rendomNum() {
-    $fake = "";
-    $i = rand(1,5);
-
-        for ($i; $i<=5; $i++){
-            $fake .= "<i class=' icon-bag'></i>";
-        }
-        return $fake;
-    }
 
 /**
  * @param $data
@@ -173,22 +192,9 @@ function renderHtml($data){
  * @return string
  */
 function renderHtmlSize($data){
-    $temp_array = array();
-    $i = 0;
-    $key_array = array();
-    $html = '';
+    $html ='';
+    $temp_array =  filterFormHtml($data,'size');
 
-    foreach($data as $val) {
-        if (!in_array($val['size'], $key_array)) {
-            $key_array[$i] = $val['size'];
-            $temp_array[] = ['id' => $val['id'],'size' => $val['size']];
-        }
-        $i++;
-    }
-
-/*    usort($temp_array, function($a,$b){
-        return ($a['size']-$b['size']);
-    });*/
     foreach ($temp_array as $temp){
 
         $html .= "<div class='filter__col alax_col'>
@@ -208,18 +214,9 @@ function renderHtmlSize($data){
  * @return string
  */
 function renderHtmlName($data){
-    $temp_array = array();
-    $i = 0;
-    $key_array = array();
-    $html = '';
+    $html ='';
 
-    foreach($data as $val) {
-        if (!in_array($val['name'], $key_array)) {
-            $key_array[$i] = $val['name'];
-            $temp_array[] = ['id' => $val['id'],'name' => $val['name']];
-        }
-        $i++;
-    }
+    $temp_array =  filterFormHtml($data,'name');
 
     foreach ($temp_array as $temp){
 
@@ -235,6 +232,5 @@ function renderHtmlName($data){
     return $html;
 }
 
- 
 
 ?>
