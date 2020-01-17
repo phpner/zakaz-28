@@ -46,6 +46,11 @@
   margin-left: 115px;
 }
 .header__bg{
+  min-height: 250px!important;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+
   .header__wrap{
     position: relative;
   }
@@ -158,7 +163,10 @@
     height: 250px;
   }
   .header__top__flex {
-    min-width: 390px;
+    min-width: 440px;
+  }
+  .header__top__box {
+    flex-direction: column;
   }
 }
 
@@ -216,9 +224,7 @@
   .truby__header .back__catalog, .offers__header .back__catalog, .header__bg .back__catalog{
     margin-top: 20px;
   }
-  .header__top__flex {
-    min-width: 366px;
-  }
+
   .catalog, .contact__header{
     margin-left: auto;
     text-align: center;
@@ -439,6 +445,9 @@
   }
   .header #logo{
     max-width: 320px;
+  }
+  .header__top__flex {
+    min-width: 366px;
   }
 }
 

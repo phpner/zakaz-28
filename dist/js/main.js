@@ -448,7 +448,7 @@ $(document).ready(function($){
         var size = $(event.target).attr('data-size');
         var price = $(event.target).attr('data-price');
 
-        $(".headerInner").html("<p class='title_For'>Название</p> <p>"+name+"</p>"+" <hr> <p class='title_For'>Размер </p><p>" + size +"</p> <hr> <p class='title_For'>Цена с НДС</p><p>" + price +"</p> <hr>");
+        $(".headerInner").html("<p class='title_For'>Название</p><p>"+name+"</p>"+" <hr> <p class='title_For'>Размер </p><p>" + size +"</p> <hr> <p class='title_For'>Цена с НДС</p><p>" + price +"</p> <hr>");
 
         $(".form__item__buy .size").val(size);
 

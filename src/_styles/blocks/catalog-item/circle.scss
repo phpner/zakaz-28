@@ -1,13 +1,9 @@
 .header__bg__circle{
   background-image: url("../img/catalog-pages/header-circle.jpg");
-  min-height: 300px;
   background-position: center;
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 30px;
 }
 .circle{
   &__header{
