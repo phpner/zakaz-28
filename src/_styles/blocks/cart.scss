@@ -1,0 +1,91 @@
+.cart{
+  display: flex;
+  min-height: 50vh;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 25px 0;
+  &__box{
+    width: 100%;
+    h3{
+      font-size: 29px;
+      font-weight: 500;
+      span{
+        display: inline-block;
+        min-width: 40px;
+        padding: 1px 11px;
+        box-sizing: border-box;
+        border-radius: 14px;
+        background-color: #D6474E;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+      table{
+        border-collapse: collapse;
+        th{
+          padding: 18px 0;
+        }
+        tbody{
+          tr{
+            border-bottom: 2px solid rgba(0, 0, 0, 0.09);
+            td{
+              text-align: center;
+              background: #efefef;
+            }
+          }
+        }
+      }
+      input:not([type=number]){
+        padding: 0;
+        width: 100%;
+        background: #efefef;
+        font-family: inherit;
+        min-height: 40px;
+        display: block;
+        margin: 7px 0;
+        margin-right: 21px;
+        text-align: center;
+        border: none;
+        color: #0121c1;
+        font-weight: 500;
+      }
+    input[type=number]{
+      width: 90px;
+      border: none;
+      min-height: 40px;
+      background: #ffffff;
+      text-align: center;
+      font-weight: 500;
+      border-radius: 8px;
+      box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.54);
+    }
+    &-delete{
+      background: url("../img/basketRemove.png")0 0 no-repeat;
+      background-size: cover;
+      width: 19px;
+      height: 20px;
+      display: inline-block;
+      transition: all 0.4s;
+      &:hover{
+        background: url("../img/basketRemoveHover.png")0 0 no-repeat;
+      }
+    }
+    &-empty{
+      display: inline-block;
+      min-width: 40px;
+      padding: 12px 11px;
+      box-sizing: border-box;
+      border-radius: 14px;
+      background-color: #D6474E;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+}

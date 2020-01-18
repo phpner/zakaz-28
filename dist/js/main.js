@@ -1,5 +1,6 @@
 $(document).ready(function($){
 
+
     $('.popup-with-form').magnificPopup({
         type: 'inline',
         preloader: false,
@@ -440,13 +441,15 @@ $(document).ready(function($){
         return true;
     }
 
-    /*Отправка заказа*/
+    /*Отправка заказа / Корзина */
     $(document).on("click", ".buy-btn",function(event){
         event.preventDefault();
 
         var name = $(event.target).attr('data-name');
         var size = $(event.target).attr('data-size');
         var price = $(event.target).attr('data-price');
+        var tabel = $(event.target).attr('data-table');
+        var itemId = $(event.target).attr('data-id');
 
         $(".headerInner").html("<p class='title_For'>Название</p><p>"+name+"</p>"+" <hr> <p class='title_For'>Размер </p><p>" + size +"</p> <hr> <p class='title_For'>Цена с НДС</p><p>" + price +"</p> <hr>");
 
@@ -456,6 +459,9 @@ $(document).ready(function($){
         $(".form__item__buy .inputPrice").val(price);
         $(".form__item__buy .inputSize").val(size);
 
+        $(".form__item__buy .inputTable").val(tabel);
+        $(".form__item__buy .inputId").val(itemId);
+
         /*reset*/
 
         var cost= '';
@@ -463,7 +469,7 @@ $(document).ready(function($){
 
         if (cost === "" || cost === "0"){
             $(".total__price span").html("по запросу");
-            $(".form__item__buy .inputQuant").val("по запросу");
+            $(".form__item__buy .inputQuant").val(1);
         }
         else {
             $(".form__item__buy .total__price span").html(price.replace(/\D+/g,""));
@@ -488,7 +494,6 @@ $(document).ready(function($){
         var qu = this.value;
         cost = cost.replace(/\D+/g,"");
 
-        console.log(cost === "0")
      if(qu <= 0){
             $(".total__price span").html("0");
             $(".form__item__buy .inputQuant").val("0");
@@ -499,8 +504,8 @@ $(document).ready(function($){
          $(".form__item__buy .inputQuant").val( this.value);
          return;
         }else if (cost === ""){
-            $(".total__price span").html("	по запросу");
-            $(".form__item__buy .inputQuant").val("	по запросу");
+            $(".total__price span").html("по запросу");
+            $(".form__item__buy .inputQuant").val(this.value);
             return;
         }
 
@@ -515,6 +520,63 @@ $(document).ready(function($){
 
         $(".total__price span").html(totalPrice);
         $(".form__item__buy .inputQuant").val(qu);
+    });
+
+    $(document).on('submit',".form__item__buy",function(event){
+        event.preventDefault();
+       var table  = $(".form__item__buy .inputTable").val();
+       var itemId = $(".form__item__buy .inputId").val();
+       var qunt =  $(".form__item__buy .inputQuant").val();
+
+        var table = "cart=1&nameTable="+table+"&itemId="+itemId+"&action=cartAdd&quant="+ qunt;
+
+        $.ajax({
+            url: "cartDb.php",
+            type: "POST",
+            data: table,
+            success: function(response) {
+                console.log(response);
+            },
+            error: function (er) {
+                console.log(er.responseText)
+            }
+        });
+        console.log(this)
+    });
+
+    $(".cart__box-delete").on('click',function (event) {
+        event.preventDefault();
+        var itemId = $(this).attr('data-cart-id');
+        var table = $(this).attr('data-table');
+
+        Swal.fire({
+            title: 'Удалить?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Да',
+            cancelButtonText: 'Нет!',
+        }).then(function(result) {
+            if (result.value) {
+
+
+                var data = "cart=1&itemId="+itemId+"&action=cartDelete;";
+                console.log(itemId);
+                $.ajax({
+                    url: "cartDb.php",
+                    type: "POST",
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function (er) {
+                        console.log(er.responseText)
+                    }
+                });
+            }
+        })
     });
 
 });

@@ -35,7 +35,7 @@ gulp.task('nunjucks', function() {
 
 gulp.task('twig', function () {
 	'use strict';
-	return gulp.src(PATHS.src.templates + '*.twig')
+	return gulp.src(PATHS.src.templates + '**/*.twig')
 		.pipe(plumber())
 		.pipe(twig(data(function (file) {
 			return require('./' + PATHS.src.data + '_global.json');

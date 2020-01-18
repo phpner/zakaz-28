@@ -2,7 +2,7 @@
 /*Подключение к БД*/
 $user = "root";
 $pass = "";
-$dbh = new PDO('mysql:host=localhost;dbname=zakaz-28', $user, $pass);
+$dbh = new PDO('mysql:host=localhost;dbname=zakaz-28', $user, $pass,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 /*Получение данных*/
@@ -12,9 +12,11 @@ $item = $fromPost->item;
 $diam = $fromPost->diam;
 $diamParameter = $fromPost->diamParameter;
 $tableFilter = $fromPost->tableFilter;
-$table = (isset($_POST['table'])) ? $_POST['table'] : '' ;
 
 /*Проверка и запуск нужной функции*/
+
+
+$table = (isset($_POST['table'])) ? $_POST['table'] : '' ;
 if (!empty($table)){
     getInit($dbh,$table );
 }
@@ -69,7 +71,7 @@ function getInit($dbh,$table ){
 
     $htmlSize =  renderHtmlSize($rows);
     $htmlName =  renderHtmlName($rows);
-    $htmlBody =  renderHtml($rows);
+    $htmlBody =  renderHtml($rows,$table);
 
     header('Content-Type: application/json');
     echo json_encode(["row" => $htmlBody, "param" => $htmlSize,'names' => $htmlName],JSON_OBJECT_AS_ARRAY);
@@ -100,7 +102,7 @@ function filterByName($dbh,$itemId,$table){
         }
 
         $htmlSize =  renderHtmlSize($rows);
-        $htmlBody =  renderHtml($rows);
+        $htmlBody =  renderHtml($rows,$table);
 
         header('Content-Type: application/json');
         echo json_encode(["row" => $htmlBody, "param" => $htmlSize],JSON_OBJECT_AS_ARRAY);
@@ -131,7 +133,7 @@ function filterBySize($dbh,$sizesId, $table){
             }
         }
 
-        $htmlBody =  renderHtml($rows);
+        $htmlBody =  renderHtml($rows,$table);
 
         header('Content-Type: application/json');
         echo json_encode(["row" => $htmlBody],JSON_OBJECT_AS_ARRAY);
@@ -149,7 +151,7 @@ function filterBySize($dbh,$sizesId, $table){
  * @param $data
  * @return string
  */
-function renderHtml($data){
+function renderHtml($data,$table){
     $html = '';
     $temp_array = array();
 
@@ -175,7 +177,7 @@ function renderHtml($data){
                                          <div class='filderAjax__col__item'>".$val['cost']."</div>
                                          <div class='filderAjax__col__item weight-filter'>".rendomNum()."</div>
                                          <div class='filderAjax__col__item weight-filter'>".rendomNum()."</div>
-                                         <div class='filderAjax__col__item'><a class='buy-btn' data-name='".$val['name']."' data-size='".$val['size']."' data-price='".$val['cost']."'  href='#'></a></div>
+                                         <div class='filderAjax__col__item'><a class='buy-btn' data-table='".$table." 'data-id='".$val['id']."'  data-name='".$val['name']."' data-size='".$val['size']."' data-price='".$val['cost']."'  href='#'></a></div>
                                     </div>
                                </div>";
                 }
@@ -231,6 +233,8 @@ function renderHtmlName($data){
 
     return $html;
 }
+
+
 
 
 ?>

@@ -114,6 +114,8 @@
     overflow: hidden;
     .total__price{
         margin-top: 15px;
+        margin-bottom: 15px;
+        text-align: center;
     }
     .headerInner p{
         display: inline-block;
@@ -155,6 +157,8 @@
          border-radius: 8px;
          padding: 8px;
          margin: 10px 8px;
+         margin-left: auto;
+         margin-right: auto;
          width: 46%;
      }
      input[type=submit] {
@@ -163,7 +167,7 @@
         display: block;
         padding: 20px 15px;
         margin: auto;
-        width: 250px;
+         width: 300px;
         border: none;
         margin-top: 14px;
         font-size: 18px;
@@ -182,7 +186,7 @@
         img{
             position: absolute;
             top: 36px;
-            left: 45px;
+            left: 22px;
         }
     }
 }
