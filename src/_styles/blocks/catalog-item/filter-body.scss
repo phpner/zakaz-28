@@ -34,6 +34,7 @@
         color: #000;
         .buy-btn{
           background: url("../img/basket.png") center center no-repeat;
+          position: relative;
           background-size: 20px 16px;
           display: inline-block;
           width: 20px;
@@ -42,7 +43,6 @@
           border: 1px solid transparent;
           transition: background 0.4s;
           &:hover{
-
             border: 1px solid rgba(125, 125, 125, 0.53);
             border-radius: 5px;
             box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.33);
@@ -101,4 +101,7 @@
 
 .filderAjax__col__item:last-child, .filter-body__header__col:last-child{
   text-align: center;
+}
+.buy-btn.in-cart{
+  background: url("../img/basket-in.png") center center no-repeat!important;
 }

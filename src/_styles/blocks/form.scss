@@ -107,7 +107,7 @@
 .form__item__buy{
     background: #e8e8e8;
     width: 90%;
-    max-width: 700px;
+    max-width: 460px;
     margin: auto;
     padding: 20px;
     position: relative;
@@ -145,10 +145,13 @@
         box-shadow: 3px 4px 1px 1px rgba(0, 0, 0, 0.16);
     }
     .form__item__buy__wrap{
-
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
         flex-wrap: wrap;
+        label{
+            text-align: center;
+        }
     }
      input[type=text],input[type=number], input[type=email]{
          height: 40px;
@@ -157,8 +160,6 @@
          border-radius: 8px;
          padding: 8px;
          margin: 10px 8px;
-         margin-left: auto;
-         margin-right: auto;
          width: 46%;
      }
      input[type=submit] {
@@ -189,4 +190,7 @@
             left: 22px;
         }
     }
+}
+.form__item__buy .submit__box.form-in-cart img{
+    top: 30px;
 }

@@ -39,10 +39,10 @@
         <div class="header__top__row">
             <div class="header__top__row__top">
                 <div class="header__top__row__top__tel__box">
-                    <a class="header__top__tel__one" href="tel:+73833195546">+7 (383) 319 55 46</a>
+                    
                     <a class="header__top__tel__two" href="tel:+73833195545">+7 (383) 319 55 45</a>
                 </div>
-                <div class="header__top__email"><img src="img/email.png" alt=""></div>
+                <div class="header__top__email"><p class="header__top__email-spam" style="position: absolute;left: 1000000000%">info@transsibmetall.ru</p><img src="img/email.png" alt=""></div>
                 <div class="header__top__lang">
                     <select name="lang" id="">
                         <option value="rus">RU</option>
@@ -221,8 +221,14 @@
 					<span>Наши контакты:</span>
 						<a class="footer__col__right__top__contact__tel" href="tel:+73833195546">+7 (383) 319 55 46</a>
 						<a class="footer__col__right__top__contact__tel" href="tel:+73833195546">+7 (383) 319 55 45</a>
-						<img src="img/email.png" alt="">
-						<img style="width: 140px; margin-top: 5px" src="img/email-2-w.png" alt="">
+						<div class="email-fake">
+                            <p class="header__top__email-spam" style="position: absolute;left: 1000000000%">info@transsibmetall.ru</p>
+							<img src="img/email.png" alt="">
+						</div>
+						<div class="email-fake">
+                            <p class="header__top__email-spam" style="position: absolute;left: 1000000000%">2731130@mail.ru</p>
+							<img style="width: 140px; margin-top: 5px" src="img/email-2-w.png" alt="">
+						</div>
 
 				</div>
 
@@ -255,7 +261,7 @@
 			<form class="mfp-hide white-popup-block form__item__buy"  method="post" action="send.php">
 				<span class="headerInner">Подписаться на прайс-лист</span>
 				<div class="form__item__buy__wrap">
-					<label for="quant-number">Кол-во</label>
+					<label for="quant-number">Кол-во <br> кг</label>
 					<input type="number" id="quant-number"   name="quant" placeholder="Кол-во м." required>
 				
 				</div>
@@ -271,20 +277,28 @@
 				<input class="inputId" type="hidden" name="inputId">
 				<div class="submit__box">
 					<img src="img/basket_white.png" alt="">
-					<input type="submit" value="Добавить в карзинуы">
+					<input type="submit" value="Добавить в корзинуы">
 				</div>
 			</form>
 		</div>
 	</div>
 	</div>
 </footer>
-
+    <a href="cart.php">
+        <div class="cart-icon-box">
+            <span class="count-in"></span>
+            <svg height="475pt" viewBox="-16 0 475 475.40008" width="475pt" xmlns="http://www.w3.org/2000/svg"><path d="m149.5 373.800781c-28.054688 0-50.800781 22.742188-50.800781 50.800781 0 28.054688 22.746093 50.796876 50.800781 50.796876s50.800781-22.742188 50.800781-50.796876c-.039062-28.042968-22.761719-50.761718-50.800781-50.800781zm0 81.597657c-17.011719 0-30.800781-13.789063-30.800781-30.796876 0-17.011718 13.789062-30.800781 30.800781-30.800781s30.800781 13.789063 30.800781 30.800781c-.007812 17.007813-13.792969 30.792969-30.800781 30.796876zm0 0"/><path d="m363.398438 373.800781c-28.054688 0-50.796876 22.742188-50.796876 50.800781 0 28.054688 22.742188 50.796876 50.796876 50.796876 28.058593 0 50.800781-22.742188 50.800781-50.796876-.039063-28.042968-22.757813-50.761718-50.800781-50.800781zm0 81.597657c-17.007813 0-30.796876-13.789063-30.796876-30.796876 0-17.011718 13.789063-30.800781 30.796876-30.800781 17.011718 0 30.800781 13.789063 30.800781 30.800781-.007813 17.007813-13.792969 30.792969-30.800781 30.796876zm0 0"/><path d="m432.398438 93.601562h-338.597657l-7.402343-43.601562c-4.855469-28.898438-29.894532-50.046875-59.199219-50h-17c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h17c19.527343-.078125 36.222656 14.035156 39.402343 33.300781l40.097657 236.300781c4.855469 28.894532 29.898437 50.046876 59.199219 50h228.203124c5.519532 0 10-4.480468 10-10 0-5.523437-4.480468-10-10-10h-228.101562c-19.527344.074219-36.222656-14.035156-39.398438-33.300781l-3.300781-19.199219h224.097657c26.214843.054688 49.40625-16.972656 57.203124-42l37.296876-118.5c.980468-3.035156.421874-6.355468-1.5-8.902343-1.875-2.542969-4.835938-4.0625-8-4.097657zm-46.898438 125.398438c-5.230469 16.691406-20.710938 28.039062-38.199219 28h-227.402343l-22.699219-133.5h321.5zm0 0"/></svg>
+        </div>
+    </a>
         
             <script src="js/libs/jquery-3.4.1.min.js"></script>
+            <script src="js/libs/sweetalert2@9.js"></script>
             <script src="js/libs/slick.min.js"></script>
             <script src="js/libs/jquery-ui.min.js"></script>
             <script src="js/libs/jquery.magnific-popup.min.js"></script>
             <script src="js/main.js"></script>
         
+
+
     </body>
 </html>

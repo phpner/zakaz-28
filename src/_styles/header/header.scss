@@ -76,18 +76,20 @@
     }
     &__top__row__top {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         padding-top: 18px;
       &__tel__box{
-        width: 47%;
         display: flex;
+        margin-left: auto;
+        margin-right: 45px;
+
       }
     }
 
     &__top__tel__one {
         font-size: 18px;
         font-weight: bold;
-      margin-right: auto;
+       margin-right: auto;
 
     }
     &__top__tel__two {
@@ -98,6 +100,21 @@
         font-size: 18px;
         display: flex;
         font-weight: bold;
+      &:after{
+        content: "";
+        width: 25px;
+        height: 25px;
+        background: url(../img/email-ican.png) center center no-repeat;
+        display: block;
+        background-color: #ef672b;
+        border-radius: 50px;
+        margin-left: 2px;
+        cursor: pointer;
+        background-size: 83%;
+        position: relative;
+        top: -2px;
+        left: 2px;
+      }
       img{
         max-width: 196px;
         max-height: 18px;
@@ -105,11 +122,12 @@
 
     }
     &__top__lang {
-        margin-right: 26px;
+      margin-right: 26px;
+      margin-left: auto;
     }
     &__top__row__bootom {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         padding-top: 13px;
         a{
           margin-right: 10%;

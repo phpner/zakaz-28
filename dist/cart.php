@@ -15,7 +15,7 @@
 <body>
 <header class="header" id="header">
 
-    <div class="header__bg header__bg__circle">
+    <div class="header__bg header__bg__list">
         <div class="header__wrap">
             <div class="header__top__mob">
                 <img src="img/mob_logo.png" alt="">
@@ -39,10 +39,10 @@
                 <div class="header__top__row">
                     <div class="header__top__row__top">
                         <div class="header__top__row__top__tel__box">
-                            <a class="header__top__tel__one" href="tel:+73833195546">+7 (383) 319 55 46</a>
+
                             <a class="header__top__tel__two" href="tel:+73833195545">+7 (383) 319 55 45</a>
                         </div>
-                        <div class="header__top__email"><img src="img/email.png" alt=""></div>
+                        <div class="header__top__email"><p class="header__top__email-spam" style="position: absolute;left: 1000000000%">info@transsibmetall.ru</p><img src="img/email.png" alt=""></div>
                         <div class="header__top__lang">
                             <select name="lang" id="">
                                 <option value="rus">RU</option>
@@ -65,11 +65,11 @@
             </div>
         </div>
 
-        <section class="circle__header">
+        <section class="list__header">
             <div class="wrapper">
                 <div class="truby__text__wrap">
-                    <h1>Нержавеющий круг</h1>
-                    <span>Ознакомьтесь с прайс-листом для всей продукции нержавеющий круг</span>
+                    <h1>Корзина</h1>
+                    <span></span>
                 </div>
                 <a class="back__catalog" href="catalog.html"><i class="icon-arrD"></i>Вернуться в каталог</a>
             </div>
@@ -98,54 +98,85 @@
 
           $count = count($items);
        if (isset($_COOKIE['user']) && $count > 0){
+           $total = 0;
           ?>
                <div class="cart__box">
                    <h3>Товары <span><?php echo $count?></span></h3>
+                   <form action="send.php" method="post">
+                       <input type="hidden" name="formType" value="cart">
                         <div class="cart__box__row">
                             <table>
                                 <thead>
                                     <tr>
                                         <th>Название товара</th>
                                         <th>Размер</th>
-                                        <th>Цена</th>
-                                        <th>Кол-во</th>
+                                        <th>Цена/Т.</th>
+                                        <th>Кг.</th>
                                         <th>Удалить</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($items as $item) :?>
-                                    <tr>
+                                <?php
+                                $i = 0;
+                                foreach ($items as $item) :?>
+                                    <tr data-cart-id="<?php echo $item['cart_id']?>" data-table="<?php echo $item['name_tb']?>" data-quantity="<?php echo $item['quantity']?>">
                                        <td class="cart__box__row__item">
-                                           <input type="text" name="size" readonly value="<?php echo $item['name']?>">
+                                           <span><?php echo $item['name']?></span>
+                                           <input type="hidden" name="item[<?php echo  $i?>][name]" readonly value="<?php echo $item['name']?>">
                                        </td>
                                         <td class="cart__box__row__item">
-                                            <input type="text" name="size" readonly value="<?php echo $item['size']?>">
+                                            <span><?php echo $item['size']?></span>
+                                            <input type="hidden" name="item[<?php echo  $i?>][size]" readonly value="<?php echo $item['size']?>">
                                             </td>
                                         <td class="cart__box__row__item">
-                                            <?php  if ( (int) $item['cost']  === 0 ){ ?>
+                                            <?php  if ( (int) $item['cost']  === 0 || $item['quantity'] == ''){ ?>
                                                 <span class="cart__box-empty">по запросу</span>
-                                            <?php }else{?>
-                                                <input type="text" name="cost" readonly value="<?php echo $item['cost']?>">
+                                                <input type="hidden" name="item[<?php echo  $i?>][cost]" readonly value="по запросу">
+                                            <?php }else{
+                                                $str = preg_replace("/[^0-9]/", '',  $item['cost']);
+                                                $total += (((int) $str * (int) $item['quantity'] ) / 1000 );
+                                                    ?>
+                                                <span><?php echo $item['cost']?></span>
+                                                <input type="hidden" name="item[<?php echo  $i?>][cost]" readonly value="<?php echo $item['cost']?> ₽">
                                             <?php }?>
                                         </td>
                                         <td class="cart__box__row__item">
-                                                <input autocomplete="off" type="number" name="quantity" value="<?php echo $item['quantity']?>">
+                                                <input class="cart__box__row__item-quantity" autocomplete="off" type="number" name="item[<?php echo  $i?>][quantity]" value="<?php echo $item['quantity']?>">
                                         </td>
                                         <td class="cart__box__row__item">
-                                            <a href="#" class="cart__box-delete" data-cart-id="<?php echo $item['cart_id']?>" data-table="<?php echo $item['name_tb']?>"></a>
+                                            <a href="#" class="cart__box-delete"></a>
                                         </td>
                                     </tr>
-                                 <?php endforeach; ?>
+                                 <?php
+                                    $i++;
+                                   endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
+                       <div class="cart__form-total">
+                           <span class="cart__title">ИТОГО:</span>
+                           <span class="cart__num"><?php echo number_format($total, 2, ',', ' ') ;?> ₽</span> <br>
+                           <input type="hidden" name="total" readonly value="<?php echo  number_format($total, 0, ',', ' ') ?>">
+                          <span class="cart__title cart__nds">В том числе НДС:</span>
+                           <span class="cart__num cart__nds"><?php echo number_format((($total * 20) / 100), 2, ',', ' ')?> ₽</span> <br>
+                           <buttom class="cart__refresh">Пересчитать</buttom>
+                       </div>
+                       <div class="cart__form__info">
+                           <div class="cart__form__info-cont">
+                               <input type="text" name="name" placeholder="Имя" required>
+                               <input type="text" name="email" placeholder="Email" required>
+                               <input type="text" name="tel" placeholder="Телефон">
+                           </div>
+                           <textarea name="text" id="textarea" cols="15" rows="5" placeholder="Сообщение"></textarea>
+                           <input type="submit" value="Заказать">
+                       </div>
+               </form>
                </div>
                         <?php   }else{ ?>
-                     Корзина пуста!
+                    <h2 class="empty"> Корзина пуста!</h2>
                     <?php } ?>
    </div>
 </div>
-
 
 
 <footer class="footer">
@@ -184,8 +215,14 @@
                         <span>Наши контакты:</span>
                         <a class="footer__col__right__top__contact__tel" href="tel:+73833195546">+7 (383) 319 55 46</a>
                         <a class="footer__col__right__top__contact__tel" href="tel:+73833195546">+7 (383) 319 55 45</a>
-                        <img src="img/email.png" alt="">
-                        <img style="width: 140px; margin-top: 5px" src="img/email-2-w.png" alt="">
+                        <div class="email-fake">
+                            <p class="header__top__email-spam" style="position: absolute;left: 1000000000%">info@transsibmetall.ru</p>
+                            <img src="img/email.png" alt="">
+                        </div>
+                        <div class="email-fake">
+                            <p class="header__top__email-spam" style="position: absolute;left: 1000000000%">2731130@mail.ru</p>
+                            <img style="width: 140px; margin-top: 5px" src="img/email-2-w.png" alt="">
+                        </div>
 
                     </div>
 
@@ -218,7 +255,7 @@
                 <form class="mfp-hide white-popup-block form__item__buy"  method="post" action="send.php">
                     <span class="headerInner">Подписаться на прайс-лист</span>
                     <div class="form__item__buy__wrap">
-                        <label for="quant-number">Кол-во</label>
+                        <label for="quant-number">Кол-во <br> кг</label>
                         <input type="number" id="quant-number"   name="quant" placeholder="Кол-во м." required>
 
                     </div>
@@ -234,7 +271,7 @@
                     <input class="inputId" type="hidden" name="inputId">
                     <div class="submit__box">
                         <img src="img/basket_white.png" alt="">
-                        <input type="submit" value="Добавить в карзинуы">
+                        <input type="submit" value="Добавить в корзинуы">
                     </div>
                 </form>
             </div>

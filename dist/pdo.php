@@ -1,9 +1,6 @@
 <?php
 /*Подключение к БД*/
-$user = "root";
-$pass = "";
-$dbh = new PDO('mysql:host=localhost;dbname=zakaz-28', $user, $pass,[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+require dirname(__FILE__)."/db_settings.php";
 
 /*Получение данных*/
 $fromPost = json_decode(file_get_contents('php://input'));
@@ -27,6 +24,17 @@ if (!empty($item) && !$diamParameter){
 
 if ($diamParameter){
     filterBySize($dbh,$diam,$tableFilter);
+}
+
+
+function lightUpSeleced($dbh){
+    /*Подсветка кнопки "купить" */
+    $cookie     = $_COOKIE['user'];
+
+    $sql        = "SELECT `name_tb`, `item_id`FROM cart WHERE cookie ='".$cookie."' ";
+    $stmt = $dbh->query($sql);
+    $lightUp = $stmt->fetchAll();
+   return json_encode($lightUp);
 }
 
 /*Шлак для файк данных*/
@@ -73,8 +81,10 @@ function getInit($dbh,$table ){
     $htmlName =  renderHtmlName($rows);
     $htmlBody =  renderHtml($rows,$table);
 
+    $lightUp = lightUpSeleced($dbh);
+
     header('Content-Type: application/json');
-    echo json_encode(["row" => $htmlBody, "param" => $htmlSize,'names' => $htmlName],JSON_OBJECT_AS_ARRAY);
+    echo json_encode(["row" => $htmlBody, "param" => $htmlSize,'names' => $htmlName,'light' =>  $lightUp],JSON_OBJECT_AS_ARRAY);
     $dbh = null;
     die();
 }
@@ -86,6 +96,7 @@ function getInit($dbh,$table ){
  */
 function filterByName($dbh,$itemId,$table){
     $rows = [];
+    $lightUp = lightUpSeleced($dbh);
     try {
         foreach ($itemId  as $id){
             if ($id == "all"){
@@ -105,7 +116,7 @@ function filterByName($dbh,$itemId,$table){
         $htmlBody =  renderHtml($rows,$table);
 
         header('Content-Type: application/json');
-        echo json_encode(["row" => $htmlBody, "param" => $htmlSize],JSON_OBJECT_AS_ARRAY);
+        echo json_encode(["row" => $htmlBody, "param" => $htmlSize,'light' =>  $lightUp],JSON_OBJECT_AS_ARRAY);
         $dbh = null;
         die();
     } catch (PDOException $e) {
@@ -120,7 +131,7 @@ function filterByName($dbh,$itemId,$table){
  * @param $table
  */
 function filterBySize($dbh,$sizesId, $table){
-
+    $lightUp = lightUpSeleced($dbh);
     if (!empty($sizesId)){
         foreach ($sizesId as $id){
             if ($id == "all"){
@@ -136,7 +147,7 @@ function filterBySize($dbh,$sizesId, $table){
         $htmlBody =  renderHtml($rows,$table);
 
         header('Content-Type: application/json');
-        echo json_encode(["row" => $htmlBody],JSON_OBJECT_AS_ARRAY);
+        echo json_encode(["row" => $htmlBody,'light' =>  $lightUp],JSON_OBJECT_AS_ARRAY);
         $dbh = null;
         die();
     }
@@ -154,7 +165,6 @@ function filterBySize($dbh,$sizesId, $table){
 function renderHtml($data,$table){
     $html = '';
     $temp_array = array();
-
     foreach($data as $val) {
         $temp_array[$val['name']][] = $val;
     }

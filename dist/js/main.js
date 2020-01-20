@@ -1,6 +1,54 @@
 $(document).ready(function($){
 
 
+
+/*email copy*/
+    $('.header__top__email,.email-fake').on('click',function(){
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        var element = this;
+
+        console.log(element);
+
+        var range, selection, worked;
+
+        if (document.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(element);
+            range.select();
+        } else if (window.getSelection) {
+            selection = window.getSelection();
+            range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+
+        //window.Swal.fire('Any fool can use a computer');
+
+    try {
+            document.execCommand('copy');
+        Toast.fire({
+            icon: 'success',
+            title: 'Скопировано'
+        });
+        }
+        catch (err) {
+            alert('unable to copy text');
+        }
+    });
+
+
+
     $('.popup-with-form').magnificPopup({
         type: 'inline',
         preloader: false,
@@ -320,6 +368,24 @@ $(document).ready(function($){
             $(".load-gif").remove();
         }
     }
+
+    function lightUP(response,tableName) {
+
+        var light = JSON.parse(response.light);
+
+        light.forEach(function (v) {
+
+            setTimeout(function () {
+                console.log(tableName);
+                if (tableName === v.name_tb) {
+                    $("[data-id='" + v.item_id + "']").addClass('in-cart');
+                    console.log(v.name_tb);
+
+                    $(".cart-icon-box").addClass("cart-in-i");
+                }
+            }, 800);
+        });
+    }
     /*  console.log(dataJson);*/
     function ajaxParametr(diameter){
 
@@ -329,7 +395,7 @@ $(document).ready(function($){
         dataJson =  JSON.stringify({"diam": diameter, "tableFilter" :tableName, "diamParameter": true});
 
         $.ajax({
-            url: "/pdo.php",
+            url: "pdo.php",
             type: "JSON",
             data: dataJson,
             beforeSend:function(){
@@ -337,14 +403,18 @@ $(document).ready(function($){
             },
             success: function(response) {
                 reLoadFilter(false);
-                console.log(response)
+
                 if (!checkFilterResult(response))
                     return;
 
                 $(".filter-body__center__innder").html(response.row);
+
+                lightUP(response,tableName);
+
                 if (arccorChack){
                     arccor.accordion( "refresh" );
                 }
+
             },
             error: function (er) {
                 console.log(er.responseText)
@@ -358,7 +428,7 @@ $(document).ready(function($){
         var tableName = $(".filter").attr('id');
         dataJson =  JSON.stringify({'item': item, "diam": diameter, "tableFilter" :tableName, "diamParameter": false});
         $.ajax({
-            url: "/pdo.php",
+            url: "pdo.php",
             type: "JSON",
             data: dataJson,
             beforeSend:function(){
@@ -374,6 +444,8 @@ $(document).ready(function($){
 
                 $(".filter__box__diam .filter__col__left").append(response.param);
                 $(".filter-body__center__innder").html(response.row);
+
+                lightUP(response,tableName);
 
                 if (arccorChack){
                     arccor.accordion( "refresh" );
@@ -395,7 +467,7 @@ $(document).ready(function($){
         var table = 'table='+tableName;
 
         $.ajax({
-            url: "/pdo.php",
+            url: "pdo.php",
             type: "POST",
             data: table,
             beforeSend:function(){
@@ -421,6 +493,9 @@ $(document).ready(function($){
 
                 $(".filter__box__diam .filter__col__left").append(response.param);
                 $(".filter-body__center__innder").append(response.row);
+
+                lightUP(response,tableName);
+
                 if (arccorChack){
                     arccor.accordion( "refresh" );
                 }
@@ -445,13 +520,18 @@ $(document).ready(function($){
     $(document).on("click", ".buy-btn",function(event){
         event.preventDefault();
 
+        $(".form__item__buy .submit__box").html("<div class=\"submit__box form-in-cart\">\n" +
+            "<img src=\"img/basket_white.png\" alt=\"\">\n" +
+            "<input type=\"submit\" value=\"Добавить в корзину\">\n" +
+            "</div>");
+
         var name = $(event.target).attr('data-name');
         var size = $(event.target).attr('data-size');
         var price = $(event.target).attr('data-price');
         var tabel = $(event.target).attr('data-table');
         var itemId = $(event.target).attr('data-id');
 
-        $(".headerInner").html("<p class='title_For'>Название</p><p>"+name+"</p>"+" <hr> <p class='title_For'>Размер </p><p>" + size +"</p> <hr> <p class='title_For'>Цена с НДС</p><p>" + price +"</p> <hr>");
+        $(".headerInner").html("<p class='title_For'>Название</p><p>"+name+"</p>"+" <hr> <p class='title_For'>Размер </p><p>" + size +"</p> <hr> <p class='title_For'>Цена с НДС за т.</p><p>" + price +"</p> <hr>");
 
         $(".form__item__buy .size").val(size);
 
@@ -472,12 +552,37 @@ $(document).ready(function($){
             $(".form__item__buy .inputQuant").val(1);
         }
         else {
-            $(".form__item__buy .total__price span").html(price.replace(/\D+/g,""));
+            $(".form__item__buy .total__price span").html(cost * 1 / 1000);
             $(".form__item__buy .inputQuant").val('1');
         }
 
         $(".form__item__buy [name=\"quant\"]").val("1");
 
+
+
+        if($(this).hasClass('in-cart')){
+
+            var tableName = $(".filter").attr('id');
+            var itemId    = $(this).attr('data-id');
+            var data = "cart=1&nameTable="+tableName+"&itemId="+itemId+"&action=cartQuantity";
+            $.ajax({
+                url: "cartDb.php",
+                type: "POST",
+                data: data,
+                success: function(response) {
+                    $(".form__item__buy .submit__box").html("<div class=\"submit__box form-in-cart\">\n" +
+                        "<img src=\"img/basket-in.png\" alt=\"\">\n" +
+                        "<input type=\"submit\" value=\"Обновить корзине\">\n" +
+                        "</div>");
+                    $(".form__item__buy .inputQuant").val(response);
+                    $(".form__item__buy [name=\"quant\"]").val(response);
+                    $(".form__item__buy .total__price span").html(cost * response / 1000);
+                },
+                error: function (er) {
+                    console.log(er.responseText)
+                }
+            });
+        }
 
         $.magnificPopup.open({
             items: {
@@ -509,7 +614,7 @@ $(document).ready(function($){
             return;
         }
 
-        var totalPrice = parseInt(cost) * Number(qu);
+        var totalPrice = (parseInt(cost) * Number(qu) / 1000);
 
          totalPrice = totalPrice.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1\u202f');
 
@@ -535,19 +640,31 @@ $(document).ready(function($){
             type: "POST",
             data: table,
             success: function(response) {
-                console.log(response);
+                var light = JSON.parse(response);
+                var table = $(".filter").attr('id');
+                light.forEach(function (v) {
+
+                    if (table === v.name_tb){
+                        $("[data-id='"+v.item_id+"']").addClass('in-cart');
+                        $.magnificPopup.close();
+                        $(".cart-icon-box").addClass("cart-in-i");
+                    }
+
+                });
+
             },
             error: function (er) {
                 console.log(er.responseText)
             }
         });
-        console.log(this)
+
     });
 
+    /*delete*/
     $(".cart__box-delete").on('click',function (event) {
         event.preventDefault();
-        var itemId = $(this).attr('data-cart-id');
-        var table = $(this).attr('data-table');
+
+        var itemId =  $(this).closest('tr').attr('data-cart-id');
 
         Swal.fire({
             title: 'Удалить?',
@@ -561,15 +678,14 @@ $(document).ready(function($){
         }).then(function(result) {
             if (result.value) {
 
+                var data = "cart=1&itemId="+itemId+"&action=cartDelete";
 
-                var data = "cart=1&itemId="+itemId+"&action=cartDelete;";
-                console.log(itemId);
                 $.ajax({
                     url: "cartDb.php",
                     type: "POST",
                     data: data,
                     success: function(response) {
-                        console.log(response);
+                        location.reload();
                     },
                     error: function (er) {
                         console.log(er.responseText)
@@ -579,4 +695,63 @@ $(document).ready(function($){
         })
     });
 
+    /*refresh cart*/
+    $(".cart__box__row__item-quantity").on('change',function (event) {
+
+        $(".cart__refresh").css({'display': "inline-block"});
+        $(this).closest('tr').attr('data-quantity', this.value);
+
+
+        if (this.value < 0 || this.value === ""){
+            this.value = 0;
+            $(this).closest('tr').attr('data-quantity', 0);
+        }
+
+    });
+
+    $(".cart__refresh").on('click',function(){
+        var toRefresh = [];
+
+
+        $(".cart__box__row tbody tr").each(function () {
+           var quan =  $(this).attr('data-quantity');
+           var idQuan =  $(this).attr('data-cart-id');
+            toRefresh.push({'id' : idQuan, "quan" : quan});
+        })
+
+        var data = JSON.stringify(toRefresh)
+        var data = "cart=1&action=cartRefresh&update="+data;
+
+        $.ajax({
+            url: "cartDb.php",
+            type: "POST",
+            data: data,
+            success: function(response) {
+                document.location.reload();
+            },
+            error: function (er) {
+                console.log(er.responseText)
+            }
+        });
+    })
 });
+
+var cartIsEmpry = "cart=1&action=cartIsEmpry";
+    $.ajax({
+        url: "cartDb.php",
+        type: "POST",
+        data: cartIsEmpry,
+        success: function(response) {
+            console.log(response)
+          if (response === "yes"){
+              $(".cart-icon-box").addClass("cart-in-i");
+            }else if (response === "empty"){
+
+            }
+            //document.location.reload();
+        },
+        error: function (er) {
+            console.log(er.responseText)
+        }
+});
+

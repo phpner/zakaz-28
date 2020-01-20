@@ -1,4 +1,12 @@
 .cart{
+  .empty{
+    font-size: 34px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  form{
+    background: #efefef;
+  }
   display: flex;
   min-height: 50vh;
   justify-content: center;
@@ -26,15 +34,30 @@
     }
       table{
         border-collapse: collapse;
-        th{
-          padding: 18px 0;
+        margin-top: 23px;
+        thead{
+          border-bottom: 1px solid #333333;
+          th{
+            padding: 30px 0;
+          }
         }
+
         tbody{
           tr{
             border-bottom: 2px solid rgba(0, 0, 0, 0.09);
             td{
               text-align: center;
               background: #efefef;
+              span{
+                width: 100%;
+                background: #efefef;
+                font-family: inherit;
+                display: block;
+                margin-right: 21px;
+                text-align: center;
+                color: #0121c1;
+                font-weight: 400;
+              }
             }
           }
         }
@@ -51,7 +74,7 @@
         text-align: center;
         border: none;
         color: #0121c1;
-        font-weight: 500;
+        font-weight: 400;
       }
     input[type=number]{
       width: 90px;
@@ -62,6 +85,7 @@
       font-weight: 500;
       border-radius: 8px;
       box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.54);
+      margin: 8px 0;
     }
     &-delete{
       background: url("../img/basketRemove.png")0 0 no-repeat;
@@ -86,6 +110,127 @@
       font-weight: bold;
       text-align: center;
       vertical-align: middle;
+    }
+  }
+  &__form__info{
+    background: #efefef;
+    padding-top: 40px;
+    padding-bottom: 28px;
+    input:not([type=submit]){
+      width: 40%;
+      margin: 8px!important;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.32);
+      border-radius: 8px;
+      background: white;
+    }
+    textarea {
+      width: 99%;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 25px auto;
+      display: block;
+    }
+    input[type=submit]{
+      background: #ef672b;
+      color: #fff;
+      display: block;
+      padding: 20px 15px;
+      margin: auto;
+      width: 300px;
+      border: none;
+      margin-top: 53px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.5s;
+      &:hover{
+        background: #f3895a;
+      }
+    }
+    &-cont{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &__form-total{
+    background: #dedede;
+    text-align: right;
+    padding: 10px 50px;
+  }
+  &__title{
+    color: #d6474e;
+    padding-right: 2px;
+  }
+  &__num{
+    color: #656565;
+    font-weight: 600;
+    min-width: 74px;
+    display: inline-block;;
+  }
+  &__nds{
+    font-size: 13px;
+  }
+  &__refresh{
+    background: #d6474e;
+    padding: 12px 25px;
+    margin-top: 12px;
+    color: #fff;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.29);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: none;
+    &:hover{
+      background: lighten(#d6474e,10%);
+    }
+  }
+}
+.cart-icon-box{
+  position: fixed;
+  bottom: 50px;
+  width: 80px;
+  height: 80px;
+  right: 27px;
+  background: #ffffff;
+  padding: 21px;
+  border-radius: 50%;
+  border: 1px solid #4b4b4b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.27);
+  svg{
+    width: 50px;
+    height: 50px;
+    fill: #ef672b;
+
+  }
+
+}
+.cart-icon-box.cart-in-i{
+  background: #f1f1f1;
+  border: 1px solid #ef672b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px 1px hsla(18, 86%, 55%, 0.44);
+  transition: all 0.3s;
+  &:before{
+    content: '';
+    background: url(../img/success.png) 0 0 no-repeat;
+    width: 22px;
+    height: 22px;
+    display: block;
+    position: absolute;
+    left: 30px;
+    top: 16px;
+    background-size: 100%;
+  }
+  &:hover{
+    border-color: #f1f1f1;
+    svg{
+      fill: #8a8a8a;
     }
   }
 }

@@ -31,7 +31,20 @@
     display: none;
   }
 }
-
+.email-fake:after{
+  content: "";
+  width: 25px;
+  height: 25px;
+  background: url(../img/email-ican.png) center center no-repeat;
+  background-color: #ef672b;
+  border-radius: 50px;
+  margin-left: 2px;
+  cursor: pointer;
+  background-size: 83%;
+  display: inline-block;
+  position: relative;
+  top: 10px;
+}
 .load-gif{
   position: fixed;
   left: 50%;
@@ -108,6 +121,10 @@
     padding: 35px 0;
     font-size: 50px;
     font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
   }
 }
 
@@ -153,6 +170,8 @@
     display: flex;
     flex-direction: column;
     width: auto;
+    margin-right: 15px;
+    margin-left: 0;
   }
 
   .header__top__lang {
@@ -172,6 +191,9 @@
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 1200px) {
+  .header__top__flex {
+    min-width: 400px;
+  }
   .header__top__box{
     flex-direction: column;
   }
@@ -180,7 +202,7 @@
   }
   .header__top__lang {
     margin-right: 17px;
-    margin-left: 0;
+    margin-left: 15px;
   }
   .header__slider__item > img {
     min-height: 600px;
@@ -531,6 +553,18 @@
   .form__item__buy input[type=text], .form__item__buy input[type=number], .form__item__buy input[type=email]{
     width: 100%;
   }
+  .form__item__buy input[type=submit]{
+    width: 250px;
+  }
+  .form__item__buy .submit__box img {
+    position: absolute;
+    top: 37px!important;
+    left: 11px;
+  }
+
+.form__item__buy .form__item__buy__wrap {
+  margin-top: 18px;
+}
 }
 
 /* Extra Small Devices, Phones */
@@ -731,6 +765,80 @@
   }
   .weight-filter{
     width: 20%!important;
+  }
+  .cart__box table {
+    display: block;
+    padding-top: 20px;
+  }
+  .cart__box table tbody{
+    display: block;
+  }
+  .cart__box table  thead{
+    display: none;
+  }
+  .cart__box table tbody tr {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.09);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5);
+    margin: 25px 13px;
+    padding-bottom: 10px;
+  }
+  .cart__box input:not([type=number]) {
+    min-height: 20px;
+  }
+  .cart__box__row__item:before{
+    display: block;
+    width: 100%;
+    padding-top: 7px;
+    padding-bottom: 0px;
+  }
+  .cart__box table tbody tr td {
+    width: 100%;
+  }
+  .cart__box__row__item:nth-child(1):before{
+    content: "Название товара";
+    padding-top: 12px;
+
+  }
+  .cart__box__row__item:nth-child(2):before{
+    content: "Размер";
+    border-top: 2px solid rgba(239, 103, 43, 0.23);
+  }
+  .cart__box__row__item:nth-child(3):before{
+    content: "Цена/Т.";
+    border-top: 2px solid rgba(239, 103, 43, 0.23);
+  }
+  .cart__box__row__item:nth-child(4):before{
+    content: "Кг.";
+    border-top: 2px solid rgba(239, 103, 43, 0.23);
+  }
+  .cart__box-delete{
+    margin-top: 15px;
+  }
+  .cart__form__info-cont {
+    flex-direction: column;
+  }
+  .cart__form__info-cont input:not([type=submit]){
+    min-height: 45px;
+    width: 90%;
+  }
+  .cart__form__info textarea {
+    width: 90%;
+  }
+  .cart__box-empty {
+    margin: 5px 0;
+  }
+  .cart__box input[type=number] {
+    margin: 5px 0;
+  }
+  .cart__box table tbody tr td span {
+    margin: 8px 0;
+  }
+  .cart__form-total{
+    text-align: center;
   }
 }
 
